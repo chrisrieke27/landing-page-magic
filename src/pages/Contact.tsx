@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, MessageSquare, User } from "lucide-react";
+import { Mail, Phone, MessageSquare, User, Linkedin } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import logo from "@/assets/logo.png";
 
@@ -22,9 +22,9 @@ const Contact = () => {
       <Navbar />
       <main className="container mx-auto px-4 py-16 max-w-5xl">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Get in touch</h1>
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Contact IPO Investing</h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Feel free to reach out to us with any questions or ideas you may have. We are always looking for new ways to grow and improve our network.
+            Interested in starting a chapter or have other questions? Fill out the form below and our team will be in touch.
           </p>
         </div>
 
@@ -33,10 +33,10 @@ const Contact = () => {
           <div className="space-y-4">
             <div className="bg-card rounded-2xl border p-6 shadow-sm">
               <div className="flex items-center gap-3 mb-2">
-                <img src={logo} alt="IPO Investing HQ" className="h-8" />
-                <span className="text-xl font-bold">IPO Investing HQ</span>
+                <img src={logo} alt="IPO Investing Inc." className="h-8" />
+                <span className="text-xl font-bold">IPO Investing Inc.</span>
               </div>
-              <p className="text-muted-foreground text-sm">A National Network of Business School Clubs</p>
+              <p className="text-muted-foreground text-sm">EIN: 41-3993990<br />501(c)(3) Delaware Corporation</p>
             </div>
 
             <div className="bg-card rounded-2xl border p-5 shadow-sm flex items-center gap-4">
@@ -45,19 +45,33 @@ const Contact = () => {
               </div>
               <div>
                 <p className="text-sm font-medium">Email</p>
-                <a href="mailto:contact@ipoinvestinghq.com" className="text-primary text-sm hover:underline">
-                  contact@ipoinvestinghq.com
+                <a href="mailto:chrisrieke27@gmail.com" className="text-primary text-sm hover:underline">
+                  chrisrieke27@gmail.com
                 </a>
               </div>
             </div>
 
             <div className="bg-card rounded-2xl border p-5 shadow-sm flex items-center gap-4">
               <div className="rounded-full p-3 bg-primary/10 text-primary">
-                <MessageSquare className="h-5 w-5" />
+                <Phone className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-sm font-medium">Follow Us</p>
-                <p className="text-muted-foreground text-sm">@ipoinvestinghq</p>
+                <p className="text-sm font-medium">Text</p>
+                <a href="tel:2144155590" className="text-primary text-sm hover:underline">
+                  214-415-5590
+                </a>
+              </div>
+            </div>
+
+            <div className="bg-card rounded-2xl border p-5 shadow-sm flex items-center gap-4">
+              <div className="rounded-full p-3 bg-primary/10 text-primary">
+                <Linkedin className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="text-sm font-medium">LinkedIn</p>
+                <a href="https://linkedin.com/company/ipo-investing" target="_blank" rel="noopener noreferrer" className="text-primary text-sm hover:underline">
+                  IPO Investing
+                </a>
               </div>
             </div>
           </div>
