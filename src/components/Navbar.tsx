@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { TrendingUp, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const navLinks = [
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
   { label: "FAQs", href: "#faqs" },
-  { label: "Meeting Content", href: "#meeting-content" },
+  { label: "Chapter Resources", href: "#chapter-resources" },
 ];
 
 const Navbar = () => {
@@ -15,11 +16,8 @@ const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
-        <a href="#" className="flex items-center gap-2 font-bold text-xl">
-          <TrendingUp className="h-6 w-6 text-primary" />
-          <span className="text-foreground">
-            IPO<span className="text-primary">InvestingHQ</span>
-          </span>
+        <a href="#" className="flex items-center gap-2">
+          <img src={logo} alt="IPO Investing HQ" className="h-8" />
         </a>
 
         <div className="hidden md:flex items-center gap-8">

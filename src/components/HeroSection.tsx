@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const HeroSection = () => {
   return (
@@ -10,9 +11,7 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 py-24 md:py-36 flex flex-col items-center text-center">
         {/* Announcement Badge */}
         <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 mb-8 shadow-sm">
-          <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-primary text-primary-foreground text-xs font-bold">
-            📈
-          </span>
+          <img src={logo} alt="IPO Investing HQ" className="h-5" />
           <span className="text-sm text-muted-foreground">
             A National Network of Business School Clubs.
           </span>
