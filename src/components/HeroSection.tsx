@@ -24,13 +24,13 @@ const HeroSection = () => {
         </div>
 
         {/* Heading */}
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-tight max-w-4xl">
-          Get Ready For the IPO Boom of the Century
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight max-w-4xl" style={{ color: "#1F5FA9" }}>
+          Start an IPO Investing Chapter at Your Business School
         </h1>
 
         {/* Subtitle */}
         <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl">
-          Join the premier network of business school clubs dedicated to IPO investing, research, and education.
+          Interested in learning about new technologies through an interactive curriculum?
         </p>
 
         {/* CTA Button */}
