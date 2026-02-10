@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Heart, Menu, X } from "lucide-react";
+import { TrendingUp, Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
   { label: "FAQs", href: "#faqs" },
-  { label: "Request Device", href: "#request" },
+  { label: "Meeting Content", href: "#meeting-content" },
 ];
 
 const Navbar = () => {
@@ -15,15 +15,13 @@ const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
-        {/* Logo */}
-        <a href="#" className="flex items-center gap-2 text-primary font-bold text-xl">
-          <Heart className="h-6 w-6 fill-primary" />
+        <a href="#" className="flex items-center gap-2 font-bold text-xl">
+          <TrendingUp className="h-6 w-6 text-primary" />
           <span className="text-foreground">
-            Binary<span className="text-primary">Heart</span>
+            IPO<span className="text-primary">InvestingHQ</span>
           </span>
         </a>
 
-        {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
@@ -36,17 +34,12 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Desktop CTAs */}
-        <div className="hidden md:flex items-center gap-3">
-          <Button variant="nav" size="sm">
-            Join Us
-          </Button>
+        <div className="hidden md:flex">
           <Button variant="navAccent" size="sm">
-            Donate
+            Start a Chapter
           </Button>
         </div>
 
-        {/* Mobile Toggle */}
         <button
           className="md:hidden text-foreground"
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -55,7 +48,6 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {mobileOpen && (
         <div className="md:hidden border-t border-border bg-background px-4 pb-4 space-y-3">
           {navLinks.map((link) => (
@@ -68,14 +60,9 @@ const Navbar = () => {
               {link.label}
             </a>
           ))}
-          <div className="flex gap-3 pt-2">
-            <Button variant="nav" size="sm" className="flex-1">
-              Join Us
-            </Button>
-            <Button variant="navAccent" size="sm" className="flex-1">
-              Donate
-            </Button>
-          </div>
+          <Button variant="navAccent" size="sm" className="w-full">
+            Start a Chapter
+          </Button>
         </div>
       )}
     </nav>
