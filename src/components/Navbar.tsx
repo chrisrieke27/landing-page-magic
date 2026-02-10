@@ -1,12 +1,13 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const navLinks = [
   { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
-  { label: "FAQs", href: "#faqs" },
+  { label: "Contact", href: "/contact" },
+  { label: "FAQs", href: "/faqs" },
   { label: "Chapter Resources", href: "#chapter-resources" },
 ];
 
@@ -21,15 +22,25 @@ const Navbar = () => {
         </a>
 
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.href.startsWith("/") ? (
+              <Link
+                key={link.label}
+                to={link.href}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.label}
+                href={link.href}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {link.label}
+              </a>
+            )
+          )}
         </div>
 
         <div className="hidden md:flex">
@@ -48,16 +59,27 @@ const Navbar = () => {
 
       {mobileOpen && (
         <div className="md:hidden border-t border-border bg-background px-4 pb-4 space-y-3">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="block py-2 text-sm font-medium text-muted-foreground hover:text-foreground"
-              onClick={() => setMobileOpen(false)}
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.href.startsWith("/") ? (
+              <Link
+                key={link.label}
+                to={link.href}
+                className="block py-2 text-sm font-medium text-muted-foreground hover:text-foreground"
+                onClick={() => setMobileOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.label}
+                href={link.href}
+                className="block py-2 text-sm font-medium text-muted-foreground hover:text-foreground"
+                onClick={() => setMobileOpen(false)}
+              >
+                {link.label}
+              </a>
+            )
+          )}
           <Button variant="navAccent" size="sm" className="w-full">
             Start a Chapter
           </Button>
