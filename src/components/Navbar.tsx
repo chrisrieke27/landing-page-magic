@@ -78,7 +78,7 @@ const Navbar = () => {
               onClick={() => setChaptersOpen(!chaptersOpen)}
               className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
-              <img src={logoHQ} alt="" className="h-5 w-5 rounded object-cover" />
+              <img src={logoHQ} alt="" className="h-5 w-auto rounded" />
               Our Chapters
               <ChevronDown className={`h-3.5 w-3.5 transition-transform ${chaptersOpen ? "rotate-180" : ""}`} />
             </button>
@@ -87,7 +87,7 @@ const Navbar = () => {
                 <p className="px-4 pb-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">National</p>
                 {chapters.national.map((ch) => (
                   <a key={ch.name} href="#" className="flex items-center gap-3 px-4 py-2 hover:bg-muted/50 transition-colors">
-                    <img src={ch.logo} alt="" className="h-7 w-7 rounded object-cover" />
+                    <img src={ch.logo} alt="" className="h-7 w-auto rounded" />
                     <span className="text-sm font-medium text-foreground">{ch.name}</span>
                   </a>
                 ))}
@@ -97,7 +97,7 @@ const Navbar = () => {
                 <p className="px-4 pb-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">College Chapters</p>
                 {chapters.college.map((ch) => (
                   <a key={ch.name} href="#" className="flex items-center gap-3 px-4 py-2 hover:bg-muted/50 transition-colors">
-                    <img src={ch.logo} alt="" className="h-7 w-7 rounded object-cover" />
+                    <img src={ch.logo} alt="" className="h-7 w-auto rounded" />
                     <span className="text-sm font-medium text-foreground">{ch.name}</span>
                   </a>
                 ))}
@@ -169,7 +169,7 @@ const Navbar = () => {
             onClick={() => setMobileChaptersOpen(!mobileChaptersOpen)}
             className="flex items-center gap-2 w-full py-2 text-sm font-medium text-muted-foreground hover:text-foreground"
           >
-            <img src={logoHQ} alt="" className="h-5 w-5 rounded object-cover" />
+            <img src={logoHQ} alt="" className="h-5 w-auto rounded" />
             Our Chapters
             <ChevronDown className={`h-3.5 w-3.5 ml-auto transition-transform ${mobileChaptersOpen ? "rotate-180" : ""}`} />
           </button>
@@ -178,14 +178,14 @@ const Navbar = () => {
               <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider pt-1">National</p>
               {chapters.national.map((ch) => (
                 <a key={ch.name} href="#" className="flex items-center gap-2 py-1.5 text-sm text-foreground">
-                  <img src={ch.logo} alt="" className="h-6 w-6 rounded object-cover" />
+                  <img src={ch.logo} alt="" className="h-6 w-auto rounded" />
                   {ch.name}
                 </a>
               ))}
               <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider pt-2">College Chapters</p>
               {chapters.college.map((ch) => (
                 <a key={ch.name} href="#" className="flex items-center gap-2 py-1.5 text-sm text-foreground">
-                  <img src={ch.logo} alt="" className="h-6 w-6 rounded object-cover" />
+                  <img src={ch.logo} alt="" className="h-6 w-auto rounded" />
                   {ch.name}
                 </a>
               ))}
