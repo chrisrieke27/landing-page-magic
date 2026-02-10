@@ -12,7 +12,7 @@ const Footer = () => {
             <a href="#about" className="hover:text-foreground transition-colors">About</a>
             <a href="#contact" className="hover:text-foreground transition-colors">Contact</a>
             <a href="#faqs" className="hover:text-foreground transition-colors">FAQs</a>
-            <a href="#meeting-content" className="hover:text-foreground transition-colors">Meeting Content</a>
+            <a href="#chapter-resources" className="hover:text-foreground transition-colors">Chapter Resources</a>
           </div>
           <p className="text-sm text-muted-foreground">
             © 2026 IPO Investing HQ. All rights reserved.
