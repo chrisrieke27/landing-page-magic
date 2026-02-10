@@ -33,6 +33,40 @@ const faqCategories = [
       },
     ],
   },
+  {
+    title: "For New Chapters",
+    icon: <Users className="h-5 w-5" />,
+    iconBg: "bg-green-100 text-green-600",
+    questions: [
+      {
+        q: "What are the benefits of partnering with IPO Investing?",
+        a: "Partnering with IPO Investing provides chapters with branding, structure, and national recognition. Chapters receive professionally designed logos and slide decks, access to curated meeting content and ideas, and recognition as an official partner organization at their university.",
+      },
+      {
+        q: "How do I apply and what are the requirements to start a chapter?",
+        a: "Chapters apply through the application link on the website. Applications are reviewed, and prospective chapters must be accepted before launching. IPO Investing is a registered trademark owned by the organization, and approved chapters are authorized to use the name and branding.",
+      },
+      {
+        q: "What are the requirements to stay in good standing?",
+        a: "Chapters must attend the semesterly presidents' meeting and submit meeting photos to the chapter portal to remain in good standing.",
+      },
+    ],
+  },
+  {
+    title: "Meetings",
+    icon: <BookOpen className="h-5 w-5" />,
+    iconBg: "bg-purple-100 text-purple-600",
+    questions: [
+      {
+        q: "What topics are covered in chapter meetings?",
+        a: "Chapter meetings typically cover current market events, an IPO of the Week, a Finance Video of the Week, and a rotating finance topic. Meetings follow a broad curriculum designed to complement, not duplicate, traditional business school coursework.",
+      },
+      {
+        q: "Can chapters customize their meeting content?",
+        a: "Yes. While chapters are strongly encouraged to follow the core curriculum, they are welcome to introduce new ideas and formats. Some of our most popular segments, including Finance Video of the Week, originated from chapter recommendations.",
+      },
+    ],
+  },
 ];
 
 const FAQs = () => {
