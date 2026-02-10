@@ -11,66 +11,25 @@ import { Info, TrendingUp, Users, BookOpen } from "lucide-react";
 
 const faqCategories = [
   {
-    title: "General Information",
+    title: "General",
     icon: <Info className="h-5 w-5" />,
     iconBg: "bg-primary/10 text-primary",
     questions: [
       {
-        q: "What is IPO Investing HQ?",
-        a: "IPO Investing HQ is a national network of business school clubs dedicated to educating students about IPO investing, market analysis, and building long-term investment strategies.",
+        q: "What is IPO Investing?",
+        a: "IPO Investing is a 501(c)(3) nonprofit and national network of student-run business school clubs focused on initial public offerings, current events, and professional development.",
       },
-      {
-        q: "Who can join IPO Investing HQ?",
-        a: "Any college or university student interested in learning about IPO investing and the stock market can join. We welcome students from all majors and backgrounds.",
-      },
-    ],
-  },
-  {
-    title: "For Chapters",
-    icon: <Users className="h-5 w-5" />,
-    iconBg: "bg-green-100 text-green-600",
-    questions: [
-      {
-        q: "How do I start a chapter at my school?",
-        a: "Starting a chapter is easy! Click the 'Start a Chapter' button and fill out the application form. Our team will review your application and get back to you within a few business days with next steps.",
-      },
-      {
-        q: "What resources do chapters receive?",
-        a: "Chapters receive access to curated meeting content, presentation materials, guest speaker connections, and a community of fellow chapter leaders across the country.",
-      },
-      {
-        q: "How often should chapters meet?",
-        a: "We recommend chapters meet at least bi-weekly during the academic year. However, the frequency can be adjusted based on your school's schedule and member availability.",
-      },
-    ],
-  },
-  {
-    title: "IPO Investing",
-    icon: <TrendingUp className="h-5 w-5" />,
-    iconBg: "bg-orange-100 text-orange-600",
-    questions: [
       {
         q: "What is an IPO?",
-        a: "An IPO, or Initial Public Offering, is when a private company offers its shares to the public for the first time. It allows the company to raise capital from public investors and provides an opportunity for early investors to realize gains.",
+        a: "An IPO (Initial Public Offering) is when a private company offers its shares to the public for the first time, allowing anyone to buy ownership in the company through the stock market.",
       },
       {
-        q: "Why focus on IPO investing?",
-        a: "IPO investing offers unique opportunities to invest in companies at the beginning of their public journey. Understanding IPOs helps students develop critical analytical skills applicable across all areas of finance.",
-      },
-    ],
-  },
-  {
-    title: "Meeting Content",
-    icon: <BookOpen className="h-5 w-5" />,
-    iconBg: "bg-purple-100 text-purple-600",
-    questions: [
-      {
-        q: "What topics are covered in chapter meetings?",
-        a: "Meetings cover a range of topics including IPO analysis frameworks, market trends, financial statement analysis, valuation methods, and current IPO case studies.",
+        q: "How is IPO Investing different from every other business club out there?",
+        a: "Unlike traditional business clubs, IPO Investing chapters emphasize discussion-based meetings, current events, and how companies actually operate. College students find this much more interesting than theoretical textbook concepts or passive lectures.",
       },
       {
-        q: "Can chapters customize their meeting content?",
-        a: "Absolutely! While we provide a suggested curriculum and resources, chapters are encouraged to tailor their meetings to the interests and skill levels of their members.",
+        q: "When was IPO Investing founded?",
+        a: "IPO Investing was founded in January 2024 at Indiana University by Chris Rieke.",
       },
     ],
   },
