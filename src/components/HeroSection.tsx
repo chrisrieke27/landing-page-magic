@@ -11,10 +11,10 @@ const HeroSection = () => {
         {/* Announcement Badge */}
         <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 mb-8 shadow-sm">
           <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-primary text-primary-foreground text-xs font-bold">
-            ♻
+            📈
           </span>
           <span className="text-sm text-muted-foreground">
-            Student-Run Electronics Recycling.
+            A National Network of Business School Clubs.
           </span>
           <a
             href="#about"
@@ -25,24 +25,19 @@ const HeroSection = () => {
         </div>
 
         {/* Heading */}
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-tight max-w-3xl">
-          Empowering Through{" "}
-          <span className="text-foreground">Refurbished Technology</span>
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-tight max-w-4xl">
+          Get Ready For the IPO Boom of the Century
         </h1>
 
         {/* Subtitle */}
         <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl">
-          We refurbish donated computers and electronics to bridge the digital
-          divide—one device at a time.
+          Join the premier network of business school clubs dedicated to IPO investing, research, and education.
         </p>
 
-        {/* CTA Buttons */}
-        <div className="mt-10 flex flex-col sm:flex-row gap-4">
+        {/* CTA Button */}
+        <div className="mt-10">
           <Button variant="hero" size="lg" className="px-10 py-6 text-base">
-            Request a Device
-          </Button>
-          <Button variant="heroOutline" size="lg" className="px-10 py-6 text-base">
-            Donate
+            Start a Chapter Today
           </Button>
         </div>
       </div>
