@@ -59,16 +59,27 @@ const Navbar = () => {
 
       {mobileOpen && (
         <div className="md:hidden border-t border-border bg-background px-4 pb-4 space-y-3">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="block py-2 text-sm font-medium text-muted-foreground hover:text-foreground"
-              onClick={() => setMobileOpen(false)}
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.href.startsWith("/") ? (
+              <Link
+                key={link.label}
+                to={link.href}
+                className="block py-2 text-sm font-medium text-muted-foreground hover:text-foreground"
+                onClick={() => setMobileOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.label}
+                href={link.href}
+                className="block py-2 text-sm font-medium text-muted-foreground hover:text-foreground"
+                onClick={() => setMobileOpen(false)}
+              >
+                {link.label}
+              </a>
+            )
+          )}
           <Button variant="navAccent" size="sm" className="w-full">
             Start a Chapter
           </Button>
