@@ -27,7 +27,7 @@ const OurChapters = () => {
                 alt={ch.name}
                 className="w-full max-w-[200px] rounded-2xl shadow-sm border border-border/50"
               />
-              <p className="mt-3 text-sm font-medium text-foreground">{ch.name}</p>
+              <p className="mt-3 text-base md:text-lg font-medium text-foreground w-full text-center">{ch.name}</p>
             </div>
           ))}
         </div>
