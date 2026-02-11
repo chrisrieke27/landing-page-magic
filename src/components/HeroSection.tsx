@@ -31,13 +31,13 @@ const HeroSection = () => {
 
         {/* Subtitle */}
         <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl">
-          Interested in learning about new technologies through an interactive curriculum?
+          Learn about innovative companies through our interactive curriculum.
         </p>
 
         {/* CTA Button */}
         <div className="mt-10">
           <Link to="/contact">
-            <Button variant="hero" size="lg" className="px-14 py-8 text-lg md:text-xl">
+            <Button variant="hero" size="lg" className="px-14 py-8 text-xl md:text-2xl">
               Start a Chapter
             </Button>
           </Link>

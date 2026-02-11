@@ -1,9 +1,9 @@
 import { TrendingUp, Newspaper, Briefcase } from "lucide-react";
 
 const focuses = [
-  { icon: TrendingUp, label: "Initial Public Offerings" },
-  { icon: Newspaper, label: "Current Events" },
-  { icon: Briefcase, label: "Professional Development" },
+  { icon: TrendingUp, label: "Initial Public\nOfferings" },
+  { icon: Newspaper, label: "Current\nEvents" },
+  { icon: Briefcase, label: "Professional\nDevelopment" },
 ];
 
 const CoreFocus = () => {
@@ -24,7 +24,7 @@ const CoreFocus = () => {
               <div className="h-16 w-16 rounded-2xl flex items-center justify-center mb-6 bg-primary/10 text-primary">
                 <f.icon className="h-8 w-8" />
               </div>
-              <h3 className="text-xl font-semibold text-foreground">{f.label}</h3>
+              <h3 className="text-2xl md:text-3xl font-semibold text-foreground whitespace-pre-line">{f.label}</h3>
             </div>
           ))}
         </div>

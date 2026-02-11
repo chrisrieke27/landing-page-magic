@@ -28,12 +28,14 @@ const UpcomingIPOs = () => {
               key={company.name}
               className="flex flex-col items-center text-center group"
             >
-              <img
-                src={company.image}
-                alt={company.name}
-                className="w-full max-w-[200px] rounded-2xl shadow-sm border border-border/50 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-md"
-              />
-              <p className="mt-3 text-sm font-medium text-foreground">
+              <div className="w-full max-w-[200px] aspect-[4/3] rounded-2xl shadow-sm border border-border/50 overflow-hidden transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-md">
+                <img
+                  src={company.image}
+                  alt={company.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <p className="mt-3 text-lg md:text-xl font-semibold text-foreground" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                 {company.name}
               </p>
             </div>
