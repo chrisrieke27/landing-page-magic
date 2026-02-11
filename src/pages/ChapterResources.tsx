@@ -141,7 +141,7 @@ const ChapterResources = () => {
       <Navbar />
       <main className="container mx-auto px-4 py-16 max-w-3xl">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-primary">
             IPO Investing™ Playbook
           </h1>
           <p className="text-muted-foreground text-lg">

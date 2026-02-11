@@ -13,7 +13,10 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast({ title: "Message sent!", description: "We'll get back to you soon." });
+    const subject = encodeURIComponent(`Contact from ${form.firstName} ${form.lastName}`);
+    const body = encodeURIComponent(`Name: ${form.firstName} ${form.lastName}\nEmail: ${form.email}\nPhone: ${form.phone}\n\nMessage:\n${form.message}`);
+    window.location.href = `mailto:chrisrieke27@gmail.com?subject=${subject}&body=${body}`;
+    toast({ title: "Opening email client!", description: "Your message is ready to send." });
     setForm({ firstName: "", lastName: "", email: "", phone: "", message: "" });
   };
 
@@ -22,7 +25,7 @@ const Contact = () => {
       <Navbar />
       <main className="container mx-auto px-4 py-16 max-w-5xl">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Contact IPO Investing</h1>
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-primary">Contact IPO Investing</h1>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Interested in starting a chapter or have other questions? Fill out the form below and our team will be in touch.
           </p>
@@ -36,7 +39,7 @@ const Contact = () => {
                 <img src={logo} alt="IPO Investing Inc." className="h-8" />
                 <span className="text-xl font-bold">IPO Investing Inc.</span>
               </div>
-              <p className="text-muted-foreground text-sm">EIN: 41-3993990<br />501(c)(3) Delaware Corporation</p>
+              <p className="text-muted-foreground text-sm"><strong>EIN: 41-3993990</strong><br />501(c)(3) Delaware Corporation</p>
             </div>
 
             <div className="bg-card rounded-2xl border p-5 shadow-sm flex items-center gap-4">
