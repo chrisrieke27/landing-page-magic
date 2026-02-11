@@ -10,7 +10,7 @@ import logoAM from "@/assets/logo-am.png";
 import logoSDSU from "@/assets/logo-sdsu.png";
 
 const navLinks = [
-  { label: "About", href: "#about" },
+  { label: "About", href: "/#about" },
   { label: "Contact", href: "/contact" },
   { label: "FAQs", href: "/faqs" },
   { label: "Chapter Resources", href: "/chapter-resources" },
@@ -47,9 +47,9 @@ const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
-        <a href="#" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
           <img src={logo} alt="IPO Investing HQ" className="h-8" />
-        </a>
+        </Link>
 
         <div className="hidden md:flex items-center gap-8">
           {navLinks.slice(0, 2).map((link) =>
@@ -127,9 +127,11 @@ const Navbar = () => {
         </div>
 
         <div className="hidden md:flex">
-          <Button variant="navAccent" size="sm">
-            Start a Chapter
-          </Button>
+          <Link to="/contact">
+            <Button variant="navAccent" size="sm">
+              Start a Chapter
+            </Button>
+          </Link>
         </div>
 
         <button
@@ -213,9 +215,11 @@ const Navbar = () => {
               </a>
             )
           )}
-          <Button variant="navAccent" size="sm" className="w-full">
-            Start a Chapter
-          </Button>
+          <Link to="/contact" onClick={() => setMobileOpen(false)}>
+            <Button variant="navAccent" size="sm" className="w-full">
+              Start a Chapter
+            </Button>
+          </Link>
         </div>
       )}
     </nav>
