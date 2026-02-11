@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
 
 const HeroSection = () => {
@@ -16,7 +17,7 @@ const HeroSection = () => {
             A National Network of Business School Clubs.
           </span>
           <a
-            href="#about"
+            href="/#about"
             className="text-sm font-semibold text-primary inline-flex items-center gap-1 hover:underline"
           >
             Learn more <ArrowRight className="h-3 w-3" />
@@ -35,9 +36,11 @@ const HeroSection = () => {
 
         {/* CTA Button */}
         <div className="mt-10">
-          <Button variant="hero" size="lg" className="px-10 py-6 text-base">
-            Start a Chapter Today
-          </Button>
+          <Link to="/contact">
+            <Button variant="hero" size="lg" className="px-14 py-8 text-lg md:text-xl">
+              Start a Chapter
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

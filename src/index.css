@@ -93,5 +93,20 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+  }
+
+  button, [role="button"], .font-medium, .font-semibold:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
+    font-family: 'Inter', sans-serif;
+  }
+
+  button, [role="button"] {
+    font-weight: 500;
   }
 }
