@@ -3,21 +3,21 @@ import { Users, Globe, TrendingUp } from "lucide-react";
 const steps = [
   {
     icon: Users,
-    title: "Hands-On Meetings",
+    title: "Hands On Meetings",
     description:
       "Interactive presentations, open discussion, and simulations that mirror real decision-making",
     color: "bg-primary/10 text-primary",
   },
   {
     icon: Globe,
-    title: "Real-World Focus",
+    title: "Real World Focus",
     description:
       "Discussions centered on current events and how companies actually operate beyond textbook theory",
     color: "bg-secondary/10 text-secondary",
   },
   {
     icon: TrendingUp,
-    title: "IPO-Centered Learning",
+    title: "IPO Centered Learning",
     description:
       "Analysis of innovative companies before they go public and become the next breakout names",
     color: "bg-accent text-primary",
