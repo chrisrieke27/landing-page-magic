@@ -145,11 +145,7 @@ const ChapterResources = () => {
             IPO Investing™ Playbook
           </h1>
           <p className="text-muted-foreground text-lg">
-            Everything you need to launch and run a successful chapter.{" "}
-            <Link to="/contact" className="text-primary hover:underline font-medium">
-              Contact us
-            </Link>{" "}
-            if you need help.
+            Everything you need to launch and run a successful chapter.
           </p>
           <p className="text-muted-foreground text-lg mt-2">
             Meetings should be engaging and interactive - not dry lectures.
@@ -166,14 +162,14 @@ const ChapterResources = () => {
           </div>
           <p className="text-muted-foreground">
             <a
-              href="https://drive.google.com/drive/folders/1PvNRIY3sT1fwaEYhAnCxtLGIG37yLVpb?usp=drive_link"
+              href="https://drive.google.com/drive/folders/1uYOMaLUZsucUZ48W-c5JGEsIY7ja0LES?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:underline font-medium"
             >
               Google Drive Link
-            </a>{" "}
-            — Logos & slide deck templates for chapters.
+            </a>:
+            {" "}Logos & slide deck templates for chapters.
           </p>
         </div>
 
@@ -186,9 +182,9 @@ const ChapterResources = () => {
             <h2 className="text-xl font-semibold">Video Resources</h2>
           </div>
           <div className="space-y-2 text-muted-foreground">
-            <p><strong>Why Start a Chapter:</strong> <span className="italic">Link coming soon</span></p>
-            <p><strong>How to Start a Chapter:</strong> <span className="italic">Link coming soon</span></p>
-            <p><strong>How to Run a Good Meeting:</strong> <span className="italic">Link coming soon</span></p>
+            <p><strong>5 Steps to Start a Chapter:</strong> <span className="italic">Link coming soon</span></p>
+            <p><strong>4-Tier Management Structure:</strong> <span className="italic">Link coming soon</span></p>
+            <p><strong>How to Run a Strong Meeting:</strong> <span className="italic">Link coming soon</span></p>
           </div>
         </div>
 

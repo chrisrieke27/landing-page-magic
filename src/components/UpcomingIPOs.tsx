@@ -5,9 +5,9 @@ import ipoDiscord from "@/assets/ipo-discord.png";
 
 const ipos = [
   { name: "SpaceX", image: ipoSpacex, url: "https://www.spacex.com/", position: "center" },
-  { name: "OpenAI", image: ipoOpenai, url: "https://openai.com/", position: "55% center" },
+  { name: "OpenAI", image: ipoOpenai, url: "https://openai.com/", position: "40% center" },
   { name: "Jersey Mike's", image: ipoJerseymikes, url: "https://www.jerseymikes.com/", position: "center" },
-  { name: "Discord", image: ipoDiscord, url: "https://discord.com/", position: "45% center" },
+  { name: "Discord", image: ipoDiscord, url: "https://discord.com/", position: "60% center" },
 ];
 
 const UpcomingIPOs = () => {
