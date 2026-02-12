@@ -39,7 +39,7 @@ const Contact = () => {
                 <img src={logo} alt="IPO Investing Inc." className="h-8" />
                 <span className="text-xl font-bold">IPO Investing Inc.</span>
               </div>
-              <p className="text-muted-foreground text-sm"><strong>EIN: 41-3993990</strong><br />501(c)(3) Delaware Corporation</p>
+              <p className="text-muted-foreground text-sm"><strong>EIN: 41-3993990</strong><br />501(c)(3) Delaware Nonprofit Corporation</p>
             </div>
 
             <div className="bg-card rounded-2xl border p-5 shadow-sm flex items-center gap-4">
