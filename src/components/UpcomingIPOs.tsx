@@ -4,10 +4,10 @@ import ipoJerseymikes from "@/assets/ipo-jerseymikes.png";
 import ipoDiscord from "@/assets/ipo-discord.png";
 
 const ipos = [
-  { name: "SpaceX", image: ipoSpacex },
-  { name: "OpenAI", image: ipoOpenai },
-  { name: "Jersey Mike's", image: ipoJerseymikes },
-  { name: "Discord", image: ipoDiscord },
+  { name: "SpaceX", image: ipoSpacex, url: "https://www.spacex.com/", position: "center" },
+  { name: "OpenAI", image: ipoOpenai, url: "https://openai.com/", position: "55% center" },
+  { name: "Jersey Mike's", image: ipoJerseymikes, url: "https://www.jerseymikes.com/", position: "center" },
+  { name: "Discord", image: ipoDiscord, url: "https://discord.com/", position: "45% center" },
 ];
 
 const UpcomingIPOs = () => {
@@ -24,21 +24,25 @@ const UpcomingIPOs = () => {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
           {ipos.map((company) => (
-            <div
+            <a
               key={company.name}
-              className="flex flex-col items-center text-center group"
+              href={company.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center text-center group no-underline"
             >
               <div className="w-full max-w-[200px] aspect-[4/3] rounded-2xl shadow-sm border border-border/50 overflow-hidden transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-md">
                 <img
                   src={company.image}
                   alt={company.name}
                   className="w-full h-full object-cover"
+                  style={{ objectPosition: company.position }}
                 />
               </div>
               <p className="mt-3 text-lg md:text-xl font-semibold text-foreground" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                 {company.name}
               </p>
-            </div>
+            </a>
           ))}
         </div>
       </div>
