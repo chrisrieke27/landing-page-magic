@@ -11,7 +11,7 @@ const HeroSection = () => {
     >
       <div className="container mx-auto px-4 py-24 md:py-36 flex flex-col items-center text-center">
         {/* Announcement Badge */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 mb-8 shadow-sm">
+        <div className="hidden md:inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 mb-8 shadow-sm">
           <img src={logo} alt="IPO Investing HQ" className="h-5" />
           <span className="text-sm text-muted-foreground">
             A National Network of Business School Clubs.
@@ -26,7 +26,8 @@ const HeroSection = () => {
 
         {/* Heading */}
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight max-w-4xl" style={{ color: "#1F5FA9" }}>
-          Start an IPO Investing Chapter<br />at Your Business School
+          <span className="md:hidden">IPO Investing</span>
+          <span className="hidden md:inline">Start an IPO Investing Chapter<br />at Your Business School</span>
         </h1>
 
         {/* Subtitle */}
