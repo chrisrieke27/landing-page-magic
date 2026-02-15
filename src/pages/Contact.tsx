@@ -11,13 +11,34 @@ import logo from "@/assets/logo.png";
 const Contact = () => {
   const [form, setForm] = useState({ firstName: "", lastName: "", email: "", phone: "", message: "" });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Contact from ${form.firstName} ${form.lastName}`);
-    const body = encodeURIComponent(`Name: ${form.firstName} ${form.lastName}\nEmail: ${form.email}\nPhone: ${form.phone}\n\nMessage:\n${form.message}`);
-    window.location.href = `mailto:chrisrieke27@gmail.com?subject=${subject}&body=${body}`;
-    toast({ title: "Opening email client!", description: "Your message is ready to send." });
-    setForm({ firstName: "", lastName: "", email: "", phone: "", message: "" });
+    setSubmitting(true);
+    try {
+      const res = await fetch("https://formspree.io/f/xjgewjag", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: form.firstName,
+          lastName: form.lastName,
+          email: form.email,
+          phone: form.phone,
+          message: form.message,
+        }),
+      });
+      if (res.ok) {
+        toast({ title: "Message sent!", description: "We'll get back to you soon." });
+        setForm({ firstName: "", lastName: "", email: "", phone: "", message: "" });
+      } else {
+        toast({ title: "Something went wrong", description: "Please try again or email us directly.", variant: "destructive" });
+      }
+    } catch {
+      toast({ title: "Network error", description: "Please check your connection and try again.", variant: "destructive" });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -154,7 +175,9 @@ const Contact = () => {
                 </div>
               </div>
 
-              <Button type="submit" className="w-full">Send message</Button>
+              <Button type="submit" className="w-full" disabled={submitting}>
+                {submitting ? "Sending..." : "Send message"}
+              </Button>
             </form>
           </div>
         </div>
