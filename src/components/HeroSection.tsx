@@ -26,7 +26,7 @@ const HeroSection = () => {
 
         {/* Heading */}
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight max-w-4xl" style={{ color: "#1F5FA9" }}>
-          Start an IPO Investing Chapter at Your Business School
+          Start an IPO Investing Chapter<br />at Your Business School
         </h1>
 
         {/* Subtitle */}
