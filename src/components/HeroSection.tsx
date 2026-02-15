@@ -25,9 +25,9 @@ const HeroSection = () => {
         </div>
 
         {/* Heading */}
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight max-w-4xl" style={{ color: "#1F5FA9" }}>
-          <span className="md:hidden">IPO Investing</span>
-          <span className="hidden md:inline">Start an IPO Investing Chapter<br />at Your Business School</span>
+        <h1 className="font-extrabold tracking-tight leading-tight" style={{ color: "#1F5FA9", fontFamily: "'Space Grotesk', sans-serif" }}>
+          <span className="md:hidden text-5xl">IPO Investing</span>
+          <span className="hidden md:inline text-6xl lg:text-7xl">Start an IPO Investing Chapter<br />at Your Business School</span>
         </h1>
 
         {/* Subtitle */}
