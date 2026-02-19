@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
+import logoBlack from "@/assets/logo-black.png";
 
 const HeroSection = () => {
   return (
@@ -26,7 +27,7 @@ const HeroSection = () => {
 
         {/* Heading */}
         <h1 className="font-extrabold tracking-tight leading-tight" style={{ color: "#1F5FA9", fontFamily: "'Space Grotesk', sans-serif" }}>
-          <span className="md:hidden text-5xl">IPO Investing</span>
+          <img src={logoBlack} alt="IPO Investing HQ" className="md:hidden h-24" />
           <span className="hidden md:inline text-6xl lg:text-7xl">Start an IPO Investing Chapter<br />at Your Business School</span>
         </h1>
 
