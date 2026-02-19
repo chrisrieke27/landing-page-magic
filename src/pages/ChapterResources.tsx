@@ -182,9 +182,10 @@ const ChapterResources = () => {
             <h2 className="text-xl font-semibold">Video Resources</h2>
           </div>
           <div className="space-y-2 text-muted-foreground">
-            <p><strong>5 Steps to Start a Chapter:</strong> <span className="italic">Link coming soon</span></p>
-            <p><strong>4-Tier Management Structure:</strong> <span className="italic">Link coming soon</span></p>
-            <p><strong>How to Run a Strong Meeting:</strong> <span className="italic">Link coming soon</span></p>
+            <p><strong>5 Steps to Start a Chapter:</strong>{" "}<a href="https://www.youtube.com/watch?v=hGUnZpkPZiM" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Watch Video</a></p>
+            <p><strong>Management Structure:</strong>{" "}<a href="https://www.youtube.com/watch?v=IcFC7xY0jyg" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Watch Video</a></p>
+            <p><strong>3 Steps to Run a Strong Meeting:</strong>{" "}<a href="https://www.youtube.com/watch?v=lz79xoshlsE" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Watch Video</a></p>
+            <p><strong>Long Term Vision:</strong>{" "}<a href="https://www.youtube.com/watch?v=rc6ofTNjICg" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">Watch Video</a></p>
           </div>
         </div>
 
