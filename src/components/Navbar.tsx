@@ -8,6 +8,7 @@ import logoIU from "@/assets/logo-iu.png";
 import logoUT from "@/assets/logo-ut.png";
 import logoAM from "@/assets/logo-am.png";
 import logoSDSU from "@/assets/logo-sdsu.png";
+import logoClemson from "@/assets/logo-clemson.png";
 
 const navLinks = [
   { label: "About", href: "/#about" },
@@ -25,6 +26,7 @@ const chapters = {
     { name: "IPO Investing at UT", logo: logoUT },
     { name: "IPO Investing at A&M", logo: logoAM },
     { name: "IPO Investing at SDSU", logo: logoSDSU },
+    { name: "IPO Investing at Clemson", logo: logoClemson },
   ],
 };
 

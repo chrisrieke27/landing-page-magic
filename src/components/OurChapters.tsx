@@ -2,12 +2,14 @@ import chapterIU from "@/assets/chapter-iu.png";
 import chapterUT from "@/assets/chapter-ut.png";
 import chapterAM from "@/assets/chapter-am.png";
 import chapterSDSU from "@/assets/chapter-sdsu.png";
+import chapterClemson from "@/assets/chapter-clemson.png";
 
 const chapters = [
   { name: "IPO Investing at IU", logo: chapterIU },
   { name: "IPO Investing at UT", logo: chapterUT },
   { name: "IPO Investing at A&M", logo: chapterAM },
   { name: "IPO Investing at SDSU", logo: chapterSDSU },
+  { name: "IPO Investing at Clemson", logo: chapterClemson },
 ];
 
 const OurChapters = () => {
@@ -19,7 +21,7 @@ const OurChapters = () => {
             Our Chapters
           </h2>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 max-w-5xl mx-auto">
           {chapters.map((ch) => (
             <div key={ch.name} className="flex flex-col items-center text-center">
               <img
