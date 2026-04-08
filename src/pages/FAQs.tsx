@@ -17,7 +17,7 @@ const faqCategories = [
     questions: [
       {
         q: "What is IPO Investing?",
-        a: "IPO Investing is a 501(c)(3) nonprofit and national network of student-run business school clubs focused on initial public offerings, current events, and professional development.",
+        a: "IPO Investing is a nonprofit and national network of student-run business school clubs focused on initial public offerings, current events, and professional development.",
       },
       {
         q: "What is an IPO?",
