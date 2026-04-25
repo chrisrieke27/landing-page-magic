@@ -19,14 +19,14 @@ const navLinks = [
 
 const chapters = {
   national: [
-    { name: "IPO Investing HQ", logo: logoHQ },
+    { name: "IPO Investing HQ", logo: logoHQ, href: "/" },
   ],
   college: [
-    { name: "IPO Investing at IU", logo: logoIU },
-    { name: "IPO Investing at UT", logo: logoUT },
-    { name: "IPO Investing at A&M", logo: logoAM },
-    { name: "IPO Investing at SDSU", logo: logoSDSU },
-    { name: "IPO Investing at Clemson", logo: logoClemson },
+    { name: "IPO Investing at IU", logo: logoIU, href: "/chapters/iu" },
+    { name: "IPO Investing at UT", logo: logoUT, href: "/chapters/ut" },
+    { name: "IPO Investing at A&M", logo: logoAM, href: "/chapters/am" },
+    { name: "IPO Investing at SDSU", logo: logoSDSU, href: "/chapters/sdsu" },
+    { name: "IPO Investing at Clemson", logo: logoClemson, href: "/chapters/clemson" },
   ],
 };
 
@@ -88,20 +88,30 @@ const Navbar = () => {
               <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 bg-background border border-border rounded-lg shadow-lg z-50 py-3">
                 <p className="px-4 pb-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">National</p>
                 {chapters.national.map((ch) => (
-                  <a key={ch.name} href="#" className="flex items-center gap-3 px-4 py-2 hover:bg-muted/50 transition-colors">
+                  <Link
+                    key={ch.name}
+                    to={ch.href}
+                    onClick={() => setChaptersOpen(false)}
+                    className="flex items-center gap-3 px-4 py-2 hover:bg-muted/50 transition-colors"
+                  >
                     <img src={ch.logo} alt="" className="h-7 w-auto rounded" />
                     <span className="text-sm font-medium text-foreground">{ch.name}</span>
-                  </a>
+                  </Link>
                 ))}
 
                 <div className="my-2 border-t border-border" />
 
                 <p className="px-4 pb-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">College Chapters</p>
                 {chapters.college.map((ch) => (
-                  <a key={ch.name} href="#" className="flex items-center gap-3 px-4 py-2 hover:bg-muted/50 transition-colors">
+                  <Link
+                    key={ch.name}
+                    to={ch.href}
+                    onClick={() => setChaptersOpen(false)}
+                    className="flex items-center gap-3 px-4 py-2 hover:bg-muted/50 transition-colors"
+                  >
                     <img src={ch.logo} alt="" className="h-7 w-auto rounded" />
                     <span className="text-sm font-medium text-foreground">{ch.name}</span>
-                  </a>
+                  </Link>
                 ))}
               </div>
             )}
@@ -181,17 +191,27 @@ const Navbar = () => {
             <div className="pl-4 space-y-1">
               <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider pt-1">National</p>
               {chapters.national.map((ch) => (
-                <a key={ch.name} href="#" className="flex items-center gap-2 py-1.5 text-sm text-foreground">
+                <Link
+                  key={ch.name}
+                  to={ch.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center gap-2 py-1.5 text-sm text-foreground"
+                >
                   <img src={ch.logo} alt="" className="h-6 w-auto rounded" />
                   {ch.name}
-                </a>
+                </Link>
               ))}
               <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider pt-2">College Chapters</p>
               {chapters.college.map((ch) => (
-                <a key={ch.name} href="#" className="flex items-center gap-2 py-1.5 text-sm text-foreground">
+                <Link
+                  key={ch.name}
+                  to={ch.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center gap-2 py-1.5 text-sm text-foreground"
+                >
                   <img src={ch.logo} alt="" className="h-6 w-auto rounded" />
                   {ch.name}
-                </a>
+                </Link>
               ))}
             </div>
           )}
