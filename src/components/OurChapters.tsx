@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import chapterIU from "@/assets/chapter-iu.png";
 import chapterUT from "@/assets/chapter-ut.png";
 import chapterAM from "@/assets/chapter-am.png";
@@ -5,11 +6,11 @@ import chapterSDSU from "@/assets/chapter-sdsu.png";
 import chapterClemson from "@/assets/chapter-clemson.png";
 
 const chapters = [
-  { name: "IPO Investing at IU", logo: chapterIU },
-  { name: "IPO Investing at UT", logo: chapterUT },
-  { name: "IPO Investing at A&M", logo: chapterAM },
-  { name: "IPO Investing at SDSU", logo: chapterSDSU },
-  { name: "IPO Investing at Clemson", logo: chapterClemson },
+  { name: "IPO Investing at IU", logo: chapterIU, href: "/chapters/iu" },
+  { name: "IPO Investing at UT", logo: chapterUT, href: "/chapters/ut" },
+  { name: "IPO Investing at A&M", logo: chapterAM, href: "/chapters/am" },
+  { name: "IPO Investing at SDSU", logo: chapterSDSU, href: "/chapters/sdsu" },
+  { name: "IPO Investing at Clemson", logo: chapterClemson, href: "/chapters/clemson" },
 ];
 
 const OurChapters = () => {
@@ -23,13 +24,17 @@ const OurChapters = () => {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 max-w-5xl mx-auto">
           {chapters.map((ch) => (
-            <div key={ch.name} className="flex flex-col items-center text-center">
+            <Link
+              key={ch.name}
+              to={ch.href}
+              className="flex flex-col items-center text-center group"
+            >
               <img
                 src={ch.logo}
                 alt={ch.name}
-                className="w-full max-w-[200px] rounded-2xl shadow-sm border border-border/50"
+                className="w-full max-w-[200px] rounded-2xl shadow-sm border border-border/50 transition-transform group-hover:scale-105 group-hover:shadow-md"
               />
-            </div>
+            </Link>
           ))}
         </div>
       </div>
