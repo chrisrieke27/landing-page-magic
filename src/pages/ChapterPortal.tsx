@@ -272,7 +272,7 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
 
   const directors = useMemo(() => roster.filter((r) => r.role === "Director"), [roster]);
   const execBoard = useMemo(() => roster.filter((r) => r.role !== "Director"), [roster]);
-  const allCompliant = compliance.length === COMPLIANCE_STEPS.length && compliance.every(Boolean);
+  const allCompliant = compliance.length === complianceSteps.length && compliance.every(Boolean);
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
