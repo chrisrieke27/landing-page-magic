@@ -198,12 +198,12 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
 
   // Ensure compliance array length matches steps
   useEffect(() => {
-    if (compliance.length !== COMPLIANCE_STEPS.length) {
-      const next = COMPLIANCE_STEPS.map((_, i) => compliance[i] ?? false);
+    if (compliance.length !== complianceSteps.length) {
+      const next = complianceSteps.map((_, i) => compliance[i] ?? false);
       setCompliance(next);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [complianceSteps.length]);
 
   const [editMode, setEditMode] = useState(false);
   const [complianceEdit, setComplianceEdit] = useState(false);
