@@ -176,9 +176,10 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
     `chapter:${chapter.slug}:roster`,
     defaultRoster,
   );
+  const complianceSteps = useMemo(() => getComplianceSteps(chapter.slug), [chapter.slug]);
   const [compliance, setCompliance] = useLocalStorage<boolean[]>(
     `chapter:${chapter.slug}:compliance`,
-    defaultCompliance,
+    () => defaultCompliance(complianceSteps),
   );
 
   // Migrate roster if Faculty Advisor is missing (legacy localStorage)
