@@ -89,13 +89,26 @@ const PHOTOS_URL =
 type Meeting = { id: number; date: string; theme: string };
 type RosterRow = { id: string; role: string; name: string; removable?: boolean };
 
-const COMPLIANCE_STEPS = [
+const BASE_COMPLIANCE_STEPS = [
   "Chapter Founder Selected",
   "Virtual Meeting with Exec Board",
   "In Person Meeting #1 Complete",
   "Successful Registration with School",
   "Successful Participation with Quarterly Meeting — IPO Investing HQ",
 ];
+
+const AM_CLEMSON_COMPLIANCE_STEPS = [
+  "Chapter Founder Selected",
+  "Virtual Meeting with Exec Board",
+  "In Person Meeting #1 Complete",
+  "University Registration Submitted",
+  "University Approved",
+];
+
+const getComplianceSteps = (slug: string): string[] => {
+  if (slug === "am" || slug === "clemson") return AM_CLEMSON_COMPLIANCE_STEPS;
+  return BASE_COMPLIANCE_STEPS;
+};
 
 const defaultMeetings = (): Meeting[] =>
   Array.from({ length: 6 }, (_, i) => ({ id: i + 1, date: "TBD", theme: "TBD" }));
@@ -111,7 +124,7 @@ const defaultRoster = (): RosterRow[] => [
   { id: "dir-1", role: "Director", name: "", removable: true },
 ];
 
-const defaultCompliance = (): boolean[] => COMPLIANCE_STEPS.map(() => false);
+const defaultCompliance = (steps: string[]): boolean[] => steps.map(() => false);
 
 function useLocalStorage<T>(key: string, initial: () => T) {
   const [value, setValue] = useState<T>(() => {
@@ -163,9 +176,10 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
     `chapter:${chapter.slug}:roster`,
     defaultRoster,
   );
+  const complianceSteps = useMemo(() => getComplianceSteps(chapter.slug), [chapter.slug]);
   const [compliance, setCompliance] = useLocalStorage<boolean[]>(
     `chapter:${chapter.slug}:compliance`,
-    defaultCompliance,
+    () => defaultCompliance(complianceSteps),
   );
 
   // Migrate roster if Faculty Advisor is missing (legacy localStorage)
@@ -184,12 +198,12 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
 
   // Ensure compliance array length matches steps
   useEffect(() => {
-    if (compliance.length !== COMPLIANCE_STEPS.length) {
-      const next = COMPLIANCE_STEPS.map((_, i) => compliance[i] ?? false);
+    if (compliance.length !== complianceSteps.length) {
+      const next = complianceSteps.map((_, i) => compliance[i] ?? false);
       setCompliance(next);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [complianceSteps.length]);
 
   const [editMode, setEditMode] = useState(false);
   const [complianceEdit, setComplianceEdit] = useState(false);
@@ -258,7 +272,7 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
 
   const directors = useMemo(() => roster.filter((r) => r.role === "Director"), [roster]);
   const execBoard = useMemo(() => roster.filter((r) => r.role !== "Director"), [roster]);
-  const allCompliant = compliance.length === COMPLIANCE_STEPS.length && compliance.every(Boolean);
+  const allCompliant = compliance.length === complianceSteps.length && compliance.every(Boolean);
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -271,7 +285,7 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
               <img
                 src={chapter.logo}
                 alt={chapter.name}
-                className="h-24 w-24 rounded-2xl shadow-md border border-border/50 bg-white object-contain"
+                className="h-24 w-40 rounded-lg shadow-md border border-border/50 bg-white object-contain p-2"
               />
               <div className="flex-1">
                 <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-1">
@@ -308,7 +322,7 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
           {/* Chapter Status */}
           <section>
             <div className="flex items-center justify-between mb-6 gap-4 flex-wrap">
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground">Chapter Status</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground">Chapter Setup</h2>
               {complianceEdit ? (
                 <Button
                   variant="outline"
@@ -339,18 +353,18 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
               {allCompliant ? (
                 <>
                   <CheckCircle2 className="h-5 w-5" />
-                  Chapter Compliance ✓
+                  Chapter Setup Complete ✓
                 </>
               ) : (
                 <>
                   <AlertCircle className="h-5 w-5" />
-                  Compliance Pending
+                  Setup In Progress
                 </>
               )}
             </div>
 
             <div className="rounded-xl border border-border bg-card shadow-sm divide-y divide-border">
-              {COMPLIANCE_STEPS.map((step, idx) => (
+              {complianceSteps.map((step, idx) => (
                 <label
                   key={idx}
                   className={`flex items-start gap-3 p-4 ${
