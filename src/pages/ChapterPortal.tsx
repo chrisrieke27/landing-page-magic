@@ -364,7 +364,7 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
             </div>
 
             <div className="rounded-xl border border-border bg-card shadow-sm divide-y divide-border">
-              {COMPLIANCE_STEPS.map((step, idx) => (
+              {complianceSteps.map((step, idx) => (
                 <label
                   key={idx}
                   className={`flex items-start gap-3 p-4 ${
