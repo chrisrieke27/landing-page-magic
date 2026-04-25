@@ -285,7 +285,7 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
               <img
                 src={chapter.logo}
                 alt={chapter.name}
-                className="h-24 w-24 rounded-2xl shadow-md border border-border/50 bg-white object-contain"
+                className="h-24 w-40 rounded-lg shadow-md border border-border/50 bg-white object-contain p-2"
               />
               <div className="flex-1">
                 <p className="text-sm font-semibold uppercase tracking-wider text-primary mb-1">
