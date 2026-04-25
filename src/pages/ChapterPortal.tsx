@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Table,
   TableBody,
@@ -20,7 +21,7 @@ import {
   DialogFooter,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { ExternalLink, Lock, LockOpen, Plus, Trash2 } from "lucide-react";
+import { CheckCircle2, ExternalLink, Lock, LockOpen, Plus, Trash2, AlertCircle, Images } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 import logoIU from "@/assets/logo-iu.png";
@@ -81,22 +82,36 @@ const CHAPTERS: Record<string, ChapterConfig> = {
 };
 
 const PASSWORD = "IPO";
+const COMPLIANCE_PASSWORD = "IPO INVESTING";
+const PHOTOS_URL =
+  "https://drive.google.com/drive/folders/1MBFi7UVmEpe8jhil-PNIIs5ZoJxWQCkI?usp=drive_link";
 
 type Meeting = { id: number; date: string; theme: string };
 type RosterRow = { id: string; role: string; name: string; removable?: boolean };
 
+const COMPLIANCE_STEPS = [
+  "Chapter Founder Selected",
+  "Virtual Meeting with Exec Board",
+  "In Person Meeting #1 Complete",
+  "Successful Registration with School",
+  "Successful Participation with Quarterly Meeting — IPO Investing HQ",
+];
+
 const defaultMeetings = (): Meeting[] =>
-  Array.from({ length: 8 }, (_, i) => ({ id: i + 1, date: "TBD", theme: "TBD" }));
+  Array.from({ length: 6 }, (_, i) => ({ id: i + 1, date: "TBD", theme: "TBD" }));
 
 const defaultRoster = (): RosterRow[] => [
   { id: "copres-1", role: "Co-President", name: "" },
   { id: "copres-2", role: "Co-President", name: "" },
+  { id: "faculty", role: "Faculty Advisor", name: "" },
   { id: "vp-ops", role: "VP of Operations", name: "" },
   { id: "vp-fin", role: "VP of Finance", name: "" },
   { id: "vp-mkt", role: "VP of Marketing", name: "" },
   { id: "vp-rec", role: "VP of Recruitment", name: "" },
   { id: "dir-1", role: "Director", name: "", removable: true },
 ];
+
+const defaultCompliance = (): boolean[] => COMPLIANCE_STEPS.map(() => false);
 
 function useLocalStorage<T>(key: string, initial: () => T) {
   const [value, setValue] = useState<T>(() => {
@@ -148,10 +163,40 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
     `chapter:${chapter.slug}:roster`,
     defaultRoster,
   );
+  const [compliance, setCompliance] = useLocalStorage<boolean[]>(
+    `chapter:${chapter.slug}:compliance`,
+    defaultCompliance,
+  );
+
+  // Migrate roster if Faculty Advisor is missing (legacy localStorage)
+  useEffect(() => {
+    if (!roster.some((r) => r.role === "Faculty Advisor")) {
+      setRoster((prev) => {
+        const idx = prev.findIndex((r) => r.id === "copres-2");
+        const insertAt = idx >= 0 ? idx + 1 : 2;
+        const next = [...prev];
+        next.splice(insertAt, 0, { id: "faculty", role: "Faculty Advisor", name: "" });
+        return next;
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Ensure compliance array length matches steps
+  useEffect(() => {
+    if (compliance.length !== COMPLIANCE_STEPS.length) {
+      const next = COMPLIANCE_STEPS.map((_, i) => compliance[i] ?? false);
+      setCompliance(next);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const [editMode, setEditMode] = useState(false);
+  const [complianceEdit, setComplianceEdit] = useState(false);
   const [pwOpen, setPwOpen] = useState(false);
   const [pwInput, setPwInput] = useState("");
+  const [compPwOpen, setCompPwOpen] = useState(false);
+  const [compPwInput, setCompPwInput] = useState("");
 
   useEffect(() => {
     document.title = `${chapter.name} | IPO Investing`;
@@ -168,8 +213,30 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
     }
   };
 
+  const handleComplianceUnlock = () => {
+    if (compPwInput === COMPLIANCE_PASSWORD) {
+      setComplianceEdit(true);
+      setCompPwOpen(false);
+      setCompPwInput("");
+      toast({ title: "Compliance editing enabled" });
+    } else {
+      toast({ title: "Incorrect password", variant: "destructive" });
+    }
+  };
+
   const updateMeeting = (id: number, field: "date" | "theme", val: string) => {
     setMeetings((prev) => prev.map((m) => (m.id === id ? { ...m, [field]: val } : m)));
+  };
+
+  const addMeeting = () => {
+    setMeetings((prev) => {
+      const nextId = prev.length ? Math.max(...prev.map((m) => m.id)) + 1 : 1;
+      return [...prev, { id: nextId, date: "TBD", theme: "TBD" }];
+    });
+  };
+
+  const removeMeeting = (id: number) => {
+    setMeetings((prev) => prev.filter((m) => m.id !== id));
   };
 
   const updateRoster = (id: string, name: string) => {
@@ -185,8 +252,13 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
     setRoster((prev) => prev.filter((r) => r.id !== id));
   };
 
+  const toggleCompliance = (idx: number) => {
+    setCompliance((prev) => prev.map((v, i) => (i === idx ? !v : v)));
+  };
+
   const directors = useMemo(() => roster.filter((r) => r.role === "Director"), [roster]);
   const execBoard = useMemo(() => roster.filter((r) => r.role !== "Director"), [roster]);
+  const allCompliant = compliance.length === COMPLIANCE_STEPS.length && compliance.every(Boolean);
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -233,6 +305,76 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
         </section>
 
         <div className="container mx-auto px-4 py-16 space-y-16 max-w-4xl">
+          {/* Chapter Status */}
+          <section>
+            <div className="flex items-center justify-between mb-6 gap-4 flex-wrap">
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground">Chapter Status</h2>
+              {complianceEdit ? (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setComplianceEdit(false);
+                    toast({ title: "Compliance locked" });
+                  }}
+                >
+                  <LockOpen className="h-4 w-4 mr-2" />
+                  Lock Compliance
+                </Button>
+              ) : (
+                <Button variant="outline" size="sm" onClick={() => setCompPwOpen(true)}>
+                  <Lock className="h-4 w-4 mr-2" />
+                  Edit Compliance
+                </Button>
+              )}
+            </div>
+
+            <div
+              className={`rounded-xl border px-5 py-4 mb-4 flex items-center gap-3 font-semibold ${
+                allCompliant
+                  ? "bg-green-50 border-green-300 text-green-800 dark:bg-green-950/40 dark:border-green-800 dark:text-green-300"
+                  : "bg-yellow-50 border-yellow-300 text-yellow-800 dark:bg-yellow-950/40 dark:border-yellow-800 dark:text-yellow-300"
+              }`}
+            >
+              {allCompliant ? (
+                <>
+                  <CheckCircle2 className="h-5 w-5" />
+                  Chapter Compliance ✓
+                </>
+              ) : (
+                <>
+                  <AlertCircle className="h-5 w-5" />
+                  Compliance Pending
+                </>
+              )}
+            </div>
+
+            <div className="rounded-xl border border-border bg-card shadow-sm divide-y divide-border">
+              {COMPLIANCE_STEPS.map((step, idx) => (
+                <label
+                  key={idx}
+                  className={`flex items-start gap-3 p-4 ${
+                    complianceEdit ? "cursor-pointer hover:bg-muted/40" : "cursor-default"
+                  }`}
+                >
+                  <Checkbox
+                    checked={!!compliance[idx]}
+                    onCheckedChange={() => complianceEdit && toggleCompliance(idx)}
+                    disabled={!complianceEdit}
+                    className="mt-0.5"
+                  />
+                  <span
+                    className={`text-sm md:text-base ${
+                      compliance[idx] ? "text-foreground" : "text-muted-foreground"
+                    }`}
+                  >
+                    {step}
+                  </span>
+                </label>
+              ))}
+            </div>
+          </section>
+
           {/* Schedule */}
           <section>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
@@ -245,12 +387,13 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
                     <TableHead className="w-24">Meeting</TableHead>
                     <TableHead className="w-48">Date</TableHead>
                     <TableHead>Theme</TableHead>
+                    {editMode && <TableHead className="w-12" />}
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {meetings.map((m) => (
+                  {meetings.map((m, i) => (
                     <TableRow key={m.id}>
-                      <TableCell className="font-medium">#{m.id}</TableCell>
+                      <TableCell className="font-medium">#{i + 1}</TableCell>
                       <TableCell>
                         {editMode ? (
                           <Input
@@ -279,10 +422,30 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
                           </span>
                         )}
                       </TableCell>
+                      {editMode && (
+                        <TableCell>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => removeMeeting(m.id)}
+                            aria-label="Delete meeting"
+                          >
+                            <Trash2 className="h-4 w-4 text-muted-foreground" />
+                          </Button>
+                        </TableCell>
+                      )}
                     </TableRow>
                   ))}
                 </TableBody>
               </Table>
+              {editMode && (
+                <div className="p-3 border-t border-border bg-muted/30">
+                  <Button variant="outline" size="sm" onClick={addMeeting}>
+                    <Plus className="h-4 w-4 mr-2" />
+                    Add Meeting
+                  </Button>
+                </div>
+              )}
             </div>
           </section>
 
@@ -380,6 +543,25 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
               </a>
             </div>
           </section>
+
+          {/* Photo Resources */}
+          <section>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
+              Photo Resources
+            </h2>
+            <div className="rounded-xl border border-border bg-card shadow-sm p-8 text-center">
+              <p className="text-muted-foreground mb-6">
+                Upload event photos and view shared chapter photo albums.
+              </p>
+              <a href={PHOTOS_URL} target="_blank" rel="noopener noreferrer">
+                <Button variant="navAccent" size="lg">
+                  <Images className="h-4 w-4 mr-2" />
+                  Upload/View Photos
+                  <ExternalLink className="h-4 w-4 ml-2" />
+                </Button>
+              </a>
+            </div>
+          </section>
         </div>
       </main>
       <Footer />
@@ -405,6 +587,31 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
               Cancel
             </Button>
             <Button onClick={handleUnlock}>Unlock</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={compPwOpen} onOpenChange={setCompPwOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Enter Compliance Password</DialogTitle>
+            <DialogDescription>
+              Enter the IPO Investing HQ password to update chapter compliance status.
+            </DialogDescription>
+          </DialogHeader>
+          <Input
+            type="password"
+            value={compPwInput}
+            onChange={(e) => setCompPwInput(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleComplianceUnlock()}
+            placeholder="Password"
+            autoFocus
+          />
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setCompPwOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={handleComplianceUnlock}>Unlock</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
