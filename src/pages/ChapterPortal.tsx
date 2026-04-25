@@ -322,7 +322,7 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
           {/* Chapter Status */}
           <section>
             <div className="flex items-center justify-between mb-6 gap-4 flex-wrap">
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground">Chapter Status</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground">Chapter Setup</h2>
               {complianceEdit ? (
                 <Button
                   variant="outline"
