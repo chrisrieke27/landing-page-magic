@@ -353,12 +353,12 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
               {allCompliant ? (
                 <>
                   <CheckCircle2 className="h-5 w-5" />
-                  Chapter Compliance ✓
+                  Chapter Setup Complete ✓
                 </>
               ) : (
                 <>
                   <AlertCircle className="h-5 w-5" />
-                  Compliance Pending
+                  Setup In Progress
                 </>
               )}
             </div>
