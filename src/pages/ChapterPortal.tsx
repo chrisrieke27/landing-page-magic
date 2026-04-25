@@ -124,7 +124,7 @@ const defaultRoster = (): RosterRow[] => [
   { id: "dir-1", role: "Director", name: "", removable: true },
 ];
 
-const defaultCompliance = (): boolean[] => COMPLIANCE_STEPS.map(() => false);
+const defaultCompliance = (steps: string[]): boolean[] => steps.map(() => false);
 
 function useLocalStorage<T>(key: string, initial: () => T) {
   const [value, setValue] = useState<T>(() => {
