@@ -89,13 +89,26 @@ const PHOTOS_URL =
 type Meeting = { id: number; date: string; theme: string };
 type RosterRow = { id: string; role: string; name: string; removable?: boolean };
 
-const COMPLIANCE_STEPS = [
+const BASE_COMPLIANCE_STEPS = [
   "Chapter Founder Selected",
   "Virtual Meeting with Exec Board",
   "In Person Meeting #1 Complete",
   "Successful Registration with School",
   "Successful Participation with Quarterly Meeting — IPO Investing HQ",
 ];
+
+const AM_CLEMSON_COMPLIANCE_STEPS = [
+  "Chapter Founder Selected",
+  "Virtual Meeting with Exec Board",
+  "In Person Meeting #1 Complete",
+  "University Registration Submitted",
+  "University Approved",
+];
+
+const getComplianceSteps = (slug: string): string[] => {
+  if (slug === "am" || slug === "clemson") return AM_CLEMSON_COMPLIANCE_STEPS;
+  return BASE_COMPLIANCE_STEPS;
+};
 
 const defaultMeetings = (): Meeting[] =>
   Array.from({ length: 6 }, (_, i) => ({ id: i + 1, date: "TBD", theme: "TBD" }));
