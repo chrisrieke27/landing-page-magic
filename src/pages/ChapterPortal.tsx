@@ -36,6 +36,7 @@ type ChapterConfig = {
   shortName: string;
   logo: string;
   driveUrl: string;
+  founded?: string;
 };
 
 const CHAPTERS: Record<string, ChapterConfig> = {
