@@ -603,40 +603,98 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
             </div>
           </section>
 
-          {/* Resources */}
+          {/* Resources (Branding) — password protected */}
           <section>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
-              Google Drive Resources
+              Google Drive Branding
             </h2>
             <div className="rounded-xl border border-border bg-card shadow-sm p-8 text-center">
-              <p className="text-muted-foreground mb-6">
-                Access slide decks, templates, and shared materials for {chapter.shortName}.
-              </p>
-              <a href={chapter.driveUrl} target="_blank" rel="noopener noreferrer">
-                <Button variant="navAccent" size="lg">
-                  Access Chapter Resources
-                  <ExternalLink className="h-4 w-4 ml-2" />
-                </Button>
-              </a>
+              {brandingUnlocked ? (
+                <>
+                  <p className="text-muted-foreground mb-6">
+                    Access slide decks, templates, and shared materials for {chapter.shortName}.
+                  </p>
+                  <a href={chapter.driveUrl} target="_blank" rel="noopener noreferrer">
+                    <Button variant="navAccent" size="lg">
+                      Access Chapter Resources
+                      <ExternalLink className="h-4 w-4 ml-2" />
+                    </Button>
+                  </a>
+                </>
+              ) : (
+                <form
+                  onSubmit={tryUnlockBranding}
+                  className="max-w-sm mx-auto space-y-3"
+                >
+                  <div className="flex items-center justify-center gap-2 text-muted-foreground mb-2">
+                    <Lock className="h-4 w-4" />
+                    <span className="text-sm">Enter Password to view branding</span>
+                  </div>
+                  <Input
+                    type="password"
+                    value={brandingPw}
+                    onChange={(e) => {
+                      setBrandingPw(e.target.value);
+                      if (brandingErr) setBrandingErr("");
+                    }}
+                    placeholder="Password"
+                  />
+                  {brandingErr && (
+                    <p className="text-sm text-destructive text-left">{brandingErr}</p>
+                  )}
+                  <Button type="submit" variant="navAccent" className="w-full">
+                    Unlock
+                  </Button>
+                </form>
+              )}
             </div>
           </section>
 
-          {/* Photo Resources */}
+          {/* Photo Resources — password protected */}
           <section>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
               Photo Resources
             </h2>
             <div className="rounded-xl border border-border bg-card shadow-sm p-8 text-center">
-              <p className="text-muted-foreground mb-6">
-                Upload event photos and view shared chapter photo albums.
-              </p>
-              <a href={PHOTOS_URL} target="_blank" rel="noopener noreferrer">
-                <Button variant="navAccent" size="lg">
-                  <Images className="h-4 w-4 mr-2" />
-                  Upload/View Photos
-                  <ExternalLink className="h-4 w-4 ml-2" />
-                </Button>
-              </a>
+              {photosUnlocked ? (
+                <>
+                  <p className="text-muted-foreground mb-6">
+                    Upload event photos and view shared chapter photo albums.
+                  </p>
+                  <a href={PHOTOS_URL} target="_blank" rel="noopener noreferrer">
+                    <Button variant="navAccent" size="lg">
+                      <Images className="h-4 w-4 mr-2" />
+                      Upload/View Photos
+                      <ExternalLink className="h-4 w-4 ml-2" />
+                    </Button>
+                  </a>
+                </>
+              ) : (
+                <form
+                  onSubmit={tryUnlockPhotos}
+                  className="max-w-sm mx-auto space-y-3"
+                >
+                  <div className="flex items-center justify-center gap-2 text-muted-foreground mb-2">
+                    <Lock className="h-4 w-4" />
+                    <span className="text-sm">Enter Password to view photos</span>
+                  </div>
+                  <Input
+                    type="password"
+                    value={photosPw}
+                    onChange={(e) => {
+                      setPhotosPw(e.target.value);
+                      if (photosErr) setPhotosErr("");
+                    }}
+                    placeholder="Password"
+                  />
+                  {photosErr && (
+                    <p className="text-sm text-destructive text-left">{photosErr}</p>
+                  )}
+                  <Button type="submit" variant="navAccent" className="w-full">
+                    Unlock
+                  </Button>
+                </form>
+              )}
             </div>
           </section>
         </div>
