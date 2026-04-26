@@ -351,6 +351,83 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
         </section>
 
         <div className="container mx-auto px-4 py-16 space-y-16 max-w-4xl">
+          {/* Roster */}
+          <section>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">Roster</h2>
+            <div className="rounded-xl border border-border bg-card shadow-sm overflow-hidden">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-1/2">Position</TableHead>
+                    <TableHead>Name</TableHead>
+                    {editMode && <TableHead className="w-12" />}
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {execBoard.map((r) => (
+                    <TableRow key={r.id}>
+                      <TableCell className="font-medium">{r.role}</TableCell>
+                      <TableCell>
+                        {editMode ? (
+                          <Input
+                            value={r.name}
+                            onChange={(e) => updateRoster(r.id, e.target.value)}
+                            placeholder="Add name"
+                            className="h-9"
+                          />
+                        ) : (
+                          <span className={!r.name ? "text-muted-foreground" : ""}>
+                            {r.name || "—"}
+                          </span>
+                        )}
+                      </TableCell>
+                      {editMode && <TableCell />}
+                    </TableRow>
+                  ))}
+                  {directors.map((r) => (
+                    <TableRow key={r.id}>
+                      <TableCell className="font-medium">Director</TableCell>
+                      <TableCell>
+                        {editMode ? (
+                          <Input
+                            value={r.name}
+                            onChange={(e) => updateRoster(r.id, e.target.value)}
+                            placeholder="Add name"
+                            className="h-9"
+                          />
+                        ) : (
+                          <span className={!r.name ? "text-muted-foreground" : ""}>
+                            {r.name || "—"}
+                          </span>
+                        )}
+                      </TableCell>
+                      {editMode && (
+                        <TableCell>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => removeDirector(r.id)}
+                            aria-label="Remove director"
+                          >
+                            <Trash2 className="h-4 w-4 text-muted-foreground" />
+                          </Button>
+                        </TableCell>
+                      )}
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+              {editMode && (
+                <div className="p-3 border-t border-border bg-muted/30">
+                  <Button variant="outline" size="sm" onClick={addDirector}>
+                    <Plus className="h-4 w-4 mr-2" />
+                    Add Director
+                  </Button>
+                </div>
+              )}
+            </div>
+          </section>
+
           {/* Chapter Setup — hidden for IU, SDSU, UT */}
           {!["iu", "sdsu", "ut"].includes(chapter.slug) && (
           <section>
