@@ -168,8 +168,9 @@ const ChapterPortal = () => {
         slug: custom.slug,
         name: custom.name,
         shortName: custom.shortName,
-        logo: custom.logoDataUrl,
-        driveUrl: "",
+        logo: getChapterLogoUrl(custom),
+        driveUrl: custom.brandingUrl || "",
+        founded: custom.founded,
       };
     }
   }
