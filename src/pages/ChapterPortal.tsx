@@ -145,9 +145,41 @@ function useLocalStorage<T>(key: string, initial: () => T) {
   return [value, setValue] as const;
 }
 
+const CUSTOM_CHAPTERS_KEY = "hq:customChapters";
+
+type CustomChapter = {
+  slug: string;
+  name: string;
+  shortName: string;
+  logoDataUrl: string;
+};
+
+const loadCustomChapters = (): CustomChapter[] => {
+  try {
+    const raw = localStorage.getItem(CUSTOM_CHAPTERS_KEY);
+    return raw ? (JSON.parse(raw) as CustomChapter[]) : [];
+  } catch {
+    return [];
+  }
+};
+
 const ChapterPortal = () => {
   const { slug } = useParams<{ slug: string }>();
-  const chapter = slug ? CHAPTERS[slug.toLowerCase()] : undefined;
+  const lookup = slug?.toLowerCase();
+  let chapter: ChapterConfig | undefined = lookup ? CHAPTERS[lookup] : undefined;
+
+  if (!chapter && lookup) {
+    const custom = loadCustomChapters().find((c) => c.slug === lookup);
+    if (custom) {
+      chapter = {
+        slug: custom.slug,
+        name: custom.name,
+        shortName: custom.shortName,
+        logo: custom.logoDataUrl,
+        driveUrl: "",
+      };
+    }
+  }
 
   if (!chapter) {
     return (
@@ -319,150 +351,6 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
         </section>
 
         <div className="container mx-auto px-4 py-16 space-y-16 max-w-4xl">
-          {/* Chapter Status */}
-          <section>
-            <div className="flex items-center justify-between mb-6 gap-4 flex-wrap">
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground">Chapter Setup</h2>
-              {complianceEdit ? (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => {
-                    setComplianceEdit(false);
-                    toast({ title: "Compliance locked" });
-                  }}
-                >
-                  <LockOpen className="h-4 w-4 mr-2" />
-                  Lock Compliance
-                </Button>
-              ) : (
-                <Button variant="outline" size="sm" onClick={() => setCompPwOpen(true)}>
-                  <Lock className="h-4 w-4 mr-2" />
-                  Edit Compliance
-                </Button>
-              )}
-            </div>
-
-            <div
-              className={`rounded-xl border px-5 py-4 mb-4 flex items-center gap-3 font-semibold ${
-                allCompliant
-                  ? "bg-green-50 border-green-300 text-green-800 dark:bg-green-950/40 dark:border-green-800 dark:text-green-300"
-                  : "bg-yellow-50 border-yellow-300 text-yellow-800 dark:bg-yellow-950/40 dark:border-yellow-800 dark:text-yellow-300"
-              }`}
-            >
-              {allCompliant ? (
-                <>
-                  <CheckCircle2 className="h-5 w-5" />
-                  Chapter Setup Complete ✓
-                </>
-              ) : (
-                <>
-                  <AlertCircle className="h-5 w-5" />
-                  Setup In Progress
-                </>
-              )}
-            </div>
-
-            <div className="rounded-xl border border-border bg-card shadow-sm divide-y divide-border">
-              {complianceSteps.map((step, idx) => (
-                <label
-                  key={idx}
-                  className={`flex items-start gap-3 p-4 ${
-                    complianceEdit ? "cursor-pointer hover:bg-muted/40" : "cursor-default"
-                  }`}
-                >
-                  <Checkbox
-                    checked={!!compliance[idx]}
-                    onCheckedChange={() => complianceEdit && toggleCompliance(idx)}
-                    disabled={!complianceEdit}
-                    className="mt-0.5"
-                  />
-                  <span
-                    className={`text-sm md:text-base ${
-                      compliance[idx] ? "text-foreground" : "text-muted-foreground"
-                    }`}
-                  >
-                    {step}
-                  </span>
-                </label>
-              ))}
-            </div>
-          </section>
-
-          {/* Schedule */}
-          <section>
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
-              Fall 2026 Meeting Schedule
-            </h2>
-            <div className="rounded-xl border border-border bg-card shadow-sm overflow-hidden">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-24">Meeting</TableHead>
-                    <TableHead className="w-48">Date</TableHead>
-                    <TableHead>Theme</TableHead>
-                    {editMode && <TableHead className="w-12" />}
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {meetings.map((m, i) => (
-                    <TableRow key={m.id}>
-                      <TableCell className="font-medium">#{i + 1}</TableCell>
-                      <TableCell>
-                        {editMode ? (
-                          <Input
-                            value={m.date}
-                            onChange={(e) => updateMeeting(m.id, "date", e.target.value)}
-                            placeholder="TBD"
-                            className="h-9"
-                          />
-                        ) : (
-                          <span className={m.date === "TBD" ? "text-muted-foreground" : ""}>
-                            {m.date}
-                          </span>
-                        )}
-                      </TableCell>
-                      <TableCell>
-                        {editMode ? (
-                          <Input
-                            value={m.theme}
-                            onChange={(e) => updateMeeting(m.id, "theme", e.target.value)}
-                            placeholder="TBD"
-                            className="h-9"
-                          />
-                        ) : (
-                          <span className={m.theme === "TBD" ? "text-muted-foreground" : ""}>
-                            {m.theme}
-                          </span>
-                        )}
-                      </TableCell>
-                      {editMode && (
-                        <TableCell>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => removeMeeting(m.id)}
-                            aria-label="Delete meeting"
-                          >
-                            <Trash2 className="h-4 w-4 text-muted-foreground" />
-                          </Button>
-                        </TableCell>
-                      )}
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-              {editMode && (
-                <div className="p-3 border-t border-border bg-muted/30">
-                  <Button variant="outline" size="sm" onClick={addMeeting}>
-                    <Plus className="h-4 w-4 mr-2" />
-                    Add Meeting
-                  </Button>
-                </div>
-              )}
-            </div>
-          </section>
-
           {/* Roster */}
           <section>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">Roster</h2>
@@ -534,6 +422,152 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
                   <Button variant="outline" size="sm" onClick={addDirector}>
                     <Plus className="h-4 w-4 mr-2" />
                     Add Director
+                  </Button>
+                </div>
+              )}
+            </div>
+          </section>
+
+          {/* Chapter Setup — hidden for IU, SDSU, UT */}
+          {!["iu", "sdsu", "ut"].includes(chapter.slug) && (
+          <section>
+            <div className="flex items-center justify-between mb-6 gap-4 flex-wrap">
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground">Chapter Setup</h2>
+              {complianceEdit ? (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setComplianceEdit(false);
+                    toast({ title: "Compliance locked" });
+                  }}
+                >
+                  <LockOpen className="h-4 w-4 mr-2" />
+                  Lock Compliance
+                </Button>
+              ) : (
+                <Button variant="outline" size="sm" onClick={() => setCompPwOpen(true)}>
+                  <Lock className="h-4 w-4 mr-2" />
+                  Edit Compliance
+                </Button>
+              )}
+            </div>
+
+            <div
+              className={`rounded-xl border px-5 py-4 mb-4 flex items-center gap-3 font-semibold ${
+                allCompliant
+                  ? "bg-green-50 border-green-300 text-green-800 dark:bg-green-950/40 dark:border-green-800 dark:text-green-300"
+                  : "bg-yellow-50 border-yellow-300 text-yellow-800 dark:bg-yellow-950/40 dark:border-yellow-800 dark:text-yellow-300"
+              }`}
+            >
+              {allCompliant ? (
+                <>
+                  <CheckCircle2 className="h-5 w-5" />
+                  Chapter Setup Complete ✓
+                </>
+              ) : (
+                <>
+                  <AlertCircle className="h-5 w-5" />
+                  Setup In Progress
+                </>
+              )}
+            </div>
+
+            <div className="rounded-xl border border-border bg-card shadow-sm divide-y divide-border">
+              {complianceSteps.map((step, idx) => (
+                <label
+                  key={idx}
+                  className={`flex items-start gap-3 p-4 ${
+                    complianceEdit ? "cursor-pointer hover:bg-muted/40" : "cursor-default"
+                  }`}
+                >
+                  <Checkbox
+                    checked={!!compliance[idx]}
+                    onCheckedChange={() => complianceEdit && toggleCompliance(idx)}
+                    disabled={!complianceEdit}
+                    className="mt-0.5"
+                  />
+                  <span
+                    className={`text-sm md:text-base ${
+                      compliance[idx] ? "text-foreground" : "text-muted-foreground"
+                    }`}
+                  >
+                    {step}
+                  </span>
+                </label>
+              ))}
+            </div>
+          </section>
+          )}
+
+          {/* Schedule */}
+          <section>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
+              Fall 2026 Meeting Schedule
+            </h2>
+            <div className="rounded-xl border border-border bg-card shadow-sm overflow-hidden">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-24">Meeting</TableHead>
+                    <TableHead className="w-48">Date</TableHead>
+                    <TableHead>Theme</TableHead>
+                    {editMode && <TableHead className="w-12" />}
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {meetings.map((m, i) => (
+                    <TableRow key={m.id}>
+                      <TableCell className="font-medium">#{i + 1}</TableCell>
+                      <TableCell>
+                        {editMode ? (
+                          <Input
+                            value={m.date}
+                            onChange={(e) => updateMeeting(m.id, "date", e.target.value)}
+                            placeholder="TBD"
+                            className="h-9"
+                          />
+                        ) : (
+                          <span className={m.date === "TBD" ? "text-muted-foreground" : ""}>
+                            {m.date}
+                          </span>
+                        )}
+                      </TableCell>
+                      <TableCell>
+                        {editMode ? (
+                          <Input
+                            value={m.theme}
+                            onChange={(e) => updateMeeting(m.id, "theme", e.target.value)}
+                            placeholder="TBD"
+                            className="h-9"
+                          />
+                        ) : (
+                          <span className={m.theme === "TBD" ? "text-muted-foreground" : ""}>
+                            {m.theme}
+                          </span>
+                        )}
+                      </TableCell>
+                      {editMode && (
+                        <TableCell>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => removeMeeting(m.id)}
+                            aria-label="Delete meeting"
+                          >
+                            <Trash2 className="h-4 w-4 text-muted-foreground" />
+                          </Button>
+                        </TableCell>
+                      )}
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+              {editMode && (
+                <div className="p-3 border-t border-border bg-muted/30">
+                  <Button variant="outline" size="sm" onClick={addMeeting}>
+                    <Plus className="h-4 w-4 mr-2" />
+                    Add Meeting
                   </Button>
                 </div>
               )}
