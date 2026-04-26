@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -7,7 +8,53 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Rocket, Users, Presentation, ExternalLink, Video } from "lucide-react";
+import { Rocket, Users, Presentation, ExternalLink, Video, Palette } from "lucide-react";
+import { loadCustomChapters } from "@/lib/customChapters";
+
+type ChapterBranding = {
+  slug: string;
+  name: string;
+  shortName: string;
+  brandingUrl: string;
+};
+
+const BASE_CHAPTER_BRANDING: ChapterBranding[] = [
+  {
+    slug: "iu",
+    name: "IPO Investing at IU",
+    shortName: "IU",
+    brandingUrl:
+      "https://drive.google.com/drive/folders/17VvW50OvMSifEUs4gTrZwlFa0AqhjIK6?usp=drive_link",
+  },
+  {
+    slug: "ut",
+    name: "IPO Investing at UT",
+    shortName: "UT",
+    brandingUrl:
+      "https://drive.google.com/drive/folders/1Y5_baWMLMRZqrNttA60AnUyN9lGxMUGq?usp=drive_link",
+  },
+  {
+    slug: "am",
+    name: "IPO Investing at A&M",
+    shortName: "A&M",
+    brandingUrl:
+      "https://drive.google.com/drive/folders/1schgA7yx07Ok5IM88HUsFB2cXrULIVO4?usp=sharing",
+  },
+  {
+    slug: "sdsu",
+    name: "IPO Investing at SDSU",
+    shortName: "SDSU",
+    brandingUrl:
+      "https://drive.google.com/drive/folders/1qW1qaDkTiTYIxkFeY_0-UJflZhvqX7le?usp=drive_link",
+  },
+  {
+    slug: "clemson",
+    name: "IPO Investing at Clemson",
+    shortName: "Clemson",
+    brandingUrl:
+      "https://drive.google.com/drive/folders/1EeK43wwQpMLtuBARH93w1gpiy4af3tzA?usp=drive_link",
+  },
+];
 
 const resourceCategories = [
   {
@@ -136,6 +183,20 @@ const resourceCategories = [
 ];
 
 const ChapterResources = () => {
+  const [chapterBranding, setChapterBranding] = useState<ChapterBranding[]>(BASE_CHAPTER_BRANDING);
+
+  useEffect(() => {
+    const customs = loadCustomChapters()
+      .filter((c) => c.brandingUrl)
+      .map<ChapterBranding>((c) => ({
+        slug: c.slug,
+        name: c.name,
+        shortName: c.shortName,
+        brandingUrl: c.brandingUrl as string,
+      }));
+    if (customs.length) setChapterBranding([...BASE_CHAPTER_BRANDING, ...customs]);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -171,6 +232,38 @@ const ChapterResources = () => {
             </a>:
             {" "}Logos & slide deck templates for chapters.
           </p>
+        </div>
+
+        {/* Chapter Branding */}
+        <div className="bg-card rounded-2xl border p-6 shadow-sm mb-8">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="rounded-full p-2 bg-amber-100 text-amber-600">
+              <Palette className="h-5 w-5" />
+            </div>
+            <h2 className="text-xl font-semibold">Chapter Branding</h2>
+          </div>
+          <p className="text-muted-foreground mb-4 text-sm">
+            Each chapter's dedicated Google Drive folder with logos, templates, and brand assets.
+          </p>
+          <ul className="divide-y divide-border rounded-lg border border-border overflow-hidden">
+            {chapterBranding.map((c) => (
+              <li
+                key={c.slug}
+                className="flex items-center justify-between gap-4 px-4 py-3"
+              >
+                <span className="font-medium text-foreground">{c.name}</span>
+                <a
+                  href={c.brandingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-primary hover:underline font-medium text-sm whitespace-nowrap"
+                >
+                  Google Drive Link
+                  <ExternalLink className="h-3.5 w-3.5" />
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         {/* Video Resources */}
