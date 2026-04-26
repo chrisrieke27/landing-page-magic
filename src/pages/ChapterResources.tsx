@@ -183,6 +183,20 @@ const resourceCategories = [
 ];
 
 const ChapterResources = () => {
+  const [chapterBranding, setChapterBranding] = useState<ChapterBranding[]>(BASE_CHAPTER_BRANDING);
+
+  useEffect(() => {
+    const customs = loadCustomChapters()
+      .filter((c) => c.brandingUrl)
+      .map<ChapterBranding>((c) => ({
+        slug: c.slug,
+        name: c.name,
+        shortName: c.shortName,
+        brandingUrl: c.brandingUrl as string,
+      }));
+    if (customs.length) setChapterBranding([...BASE_CHAPTER_BRANDING, ...customs]);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
