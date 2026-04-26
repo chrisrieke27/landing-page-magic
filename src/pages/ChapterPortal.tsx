@@ -421,6 +421,7 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
               ))}
             </div>
           </section>
+          )}
 
           {/* Schedule */}
           <section>
