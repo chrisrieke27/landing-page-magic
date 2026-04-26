@@ -234,6 +234,38 @@ const ChapterResources = () => {
           </p>
         </div>
 
+        {/* Chapter Branding */}
+        <div className="bg-card rounded-2xl border p-6 shadow-sm mb-8">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="rounded-full p-2 bg-amber-100 text-amber-600">
+              <Palette className="h-5 w-5" />
+            </div>
+            <h2 className="text-xl font-semibold">Chapter Branding</h2>
+          </div>
+          <p className="text-muted-foreground mb-4 text-sm">
+            Each chapter's dedicated Google Drive folder with logos, templates, and brand assets.
+          </p>
+          <ul className="divide-y divide-border rounded-lg border border-border overflow-hidden">
+            {chapterBranding.map((c) => (
+              <li
+                key={c.slug}
+                className="flex items-center justify-between gap-4 px-4 py-3"
+              >
+                <span className="font-medium text-foreground">{c.name}</span>
+                <a
+                  href={c.brandingUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-primary hover:underline font-medium text-sm whitespace-nowrap"
+                >
+                  Google Drive Link
+                  <ExternalLink className="h-3.5 w-3.5" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
         {/* Video Resources */}
         <div className="bg-card rounded-2xl border p-6 shadow-sm mb-8">
           <div className="flex items-center gap-3 mb-4">
