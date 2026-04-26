@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -7,7 +8,53 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Rocket, Users, Presentation, ExternalLink, Video } from "lucide-react";
+import { Rocket, Users, Presentation, ExternalLink, Video, Palette } from "lucide-react";
+import { loadCustomChapters } from "@/lib/customChapters";
+
+type ChapterBranding = {
+  slug: string;
+  name: string;
+  shortName: string;
+  brandingUrl: string;
+};
+
+const BASE_CHAPTER_BRANDING: ChapterBranding[] = [
+  {
+    slug: "iu",
+    name: "IPO Investing at IU",
+    shortName: "IU",
+    brandingUrl:
+      "https://drive.google.com/drive/folders/17VvW50OvMSifEUs4gTrZwlFa0AqhjIK6?usp=drive_link",
+  },
+  {
+    slug: "ut",
+    name: "IPO Investing at UT",
+    shortName: "UT",
+    brandingUrl:
+      "https://drive.google.com/drive/folders/1Y5_baWMLMRZqrNttA60AnUyN9lGxMUGq?usp=drive_link",
+  },
+  {
+    slug: "am",
+    name: "IPO Investing at A&M",
+    shortName: "A&M",
+    brandingUrl:
+      "https://drive.google.com/drive/folders/1schgA7yx07Ok5IM88HUsFB2cXrULIVO4?usp=sharing",
+  },
+  {
+    slug: "sdsu",
+    name: "IPO Investing at SDSU",
+    shortName: "SDSU",
+    brandingUrl:
+      "https://drive.google.com/drive/folders/1qW1qaDkTiTYIxkFeY_0-UJflZhvqX7le?usp=drive_link",
+  },
+  {
+    slug: "clemson",
+    name: "IPO Investing at Clemson",
+    shortName: "Clemson",
+    brandingUrl:
+      "https://drive.google.com/drive/folders/1EeK43wwQpMLtuBARH93w1gpiy4af3tzA?usp=drive_link",
+  },
+];
 
 const resourceCategories = [
   {
