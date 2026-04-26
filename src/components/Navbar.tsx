@@ -225,7 +225,17 @@ const Navbar = () => {
             </div>
           )}
 
-          {navLinks.slice(2).map((link) =>
+          <button
+            onClick={() => {
+              setMobileOpen(false);
+              setHqOpen(true);
+            }}
+            className="block w-full text-left py-2 text-sm font-medium text-muted-foreground hover:text-foreground"
+          >
+            HQ
+          </button>
+
+
             link.href.startsWith("/") ? (
               <Link
                 key={link.label}
