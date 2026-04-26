@@ -36,6 +36,7 @@ type ChapterConfig = {
   shortName: string;
   logo: string;
   driveUrl: string;
+  founded?: string;
 };
 
 const CHAPTERS: Record<string, ChapterConfig> = {
@@ -44,6 +45,7 @@ const CHAPTERS: Record<string, ChapterConfig> = {
     name: "IPO Investing at IU",
     shortName: "IU",
     logo: logoIU,
+    founded: "January 2024",
     driveUrl:
       "https://drive.google.com/drive/folders/17VvW50OvMSifEUs4gTrZwlFa0AqhjIK6?usp=drive_link",
   },
@@ -52,6 +54,7 @@ const CHAPTERS: Record<string, ChapterConfig> = {
     name: "IPO Investing at UT",
     shortName: "UT",
     logo: logoUT,
+    founded: "August 2025",
     driveUrl:
       "https://drive.google.com/drive/folders/1Y5_baWMLMRZqrNttA60AnUyN9lGxMUGq?usp=drive_link",
   },
@@ -60,6 +63,7 @@ const CHAPTERS: Record<string, ChapterConfig> = {
     name: "IPO Investing at A&M",
     shortName: "A&M",
     logo: logoAM,
+    founded: "March 2026",
     driveUrl:
       "https://drive.google.com/drive/folders/1schgA7yx07Ok5IM88HUsFB2cXrULIVO4?usp=sharing",
   },
@@ -68,6 +72,7 @@ const CHAPTERS: Record<string, ChapterConfig> = {
     name: "IPO Investing at SDSU",
     shortName: "SDSU",
     logo: logoSDSU,
+    founded: "January 2026",
     driveUrl:
       "https://drive.google.com/drive/folders/1qW1qaDkTiTYIxkFeY_0-UJflZhvqX7le?usp=drive_link",
   },
@@ -76,6 +81,7 @@ const CHAPTERS: Record<string, ChapterConfig> = {
     name: "IPO Investing at Clemson",
     shortName: "Clemson",
     logo: logoClemson,
+    founded: "April 2026",
     driveUrl:
       "https://drive.google.com/drive/folders/1EeK43wwQpMLtuBARH93w1gpiy4af3tzA?usp=drive_link",
   },
@@ -326,6 +332,11 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
                 <h1 className="text-3xl md:text-4xl font-bold text-foreground">
                   {chapter.name}
                 </h1>
+                {chapter.founded && (
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    Founded {chapter.founded}
+                  </p>
+                )}
               </div>
               <div>
                 {editMode ? (
