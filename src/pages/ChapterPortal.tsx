@@ -145,9 +145,41 @@ function useLocalStorage<T>(key: string, initial: () => T) {
   return [value, setValue] as const;
 }
 
+const CUSTOM_CHAPTERS_KEY = "hq:customChapters";
+
+type CustomChapter = {
+  slug: string;
+  name: string;
+  shortName: string;
+  logoDataUrl: string;
+};
+
+const loadCustomChapters = (): CustomChapter[] => {
+  try {
+    const raw = localStorage.getItem(CUSTOM_CHAPTERS_KEY);
+    return raw ? (JSON.parse(raw) as CustomChapter[]) : [];
+  } catch {
+    return [];
+  }
+};
+
 const ChapterPortal = () => {
   const { slug } = useParams<{ slug: string }>();
-  const chapter = slug ? CHAPTERS[slug.toLowerCase()] : undefined;
+  const lookup = slug?.toLowerCase();
+  let chapter: ChapterConfig | undefined = lookup ? CHAPTERS[lookup] : undefined;
+
+  if (!chapter && lookup) {
+    const custom = loadCustomChapters().find((c) => c.slug === lookup);
+    if (custom) {
+      chapter = {
+        slug: custom.slug,
+        name: custom.name,
+        shortName: custom.shortName,
+        logo: custom.logoDataUrl,
+        driveUrl: "",
+      };
+    }
+  }
 
   if (!chapter) {
     return (
