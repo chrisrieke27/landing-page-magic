@@ -151,23 +151,10 @@ function useLocalStorage<T>(key: string, initial: () => T) {
   return [value, setValue] as const;
 }
 
-const CUSTOM_CHAPTERS_KEY = "hq:customChapters";
-
-type CustomChapter = {
-  slug: string;
-  name: string;
-  shortName: string;
-  logoDataUrl: string;
-};
-
-const loadCustomChapters = (): CustomChapter[] => {
-  try {
-    const raw = localStorage.getItem(CUSTOM_CHAPTERS_KEY);
-    return raw ? (JSON.parse(raw) as CustomChapter[]) : [];
-  } catch {
-    return [];
-  }
-};
+import {
+  loadCustomChapters,
+  getChapterLogoUrl,
+} from "@/lib/customChapters";
 
 const ChapterPortal = () => {
   const { slug } = useParams<{ slug: string }>();
