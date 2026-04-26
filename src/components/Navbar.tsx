@@ -235,7 +235,7 @@ const Navbar = () => {
             HQ
           </button>
 
-
+          {navLinks.slice(2).map((link) =>
             link.href.startsWith("/") ? (
               <Link
                 key={link.label}
