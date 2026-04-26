@@ -9,6 +9,7 @@ import logoUT from "@/assets/logo-ut.png";
 import logoAM from "@/assets/logo-am.png";
 import logoSDSU from "@/assets/logo-sdsu.png";
 import logoClemson from "@/assets/logo-clemson.png";
+import HQAdminPanel from "@/components/HQAdminPanel";
 
 const navLinks = [
   { label: "About", href: "/#about" },
@@ -34,6 +35,7 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [chaptersOpen, setChaptersOpen] = useState(false);
   const [mobileChaptersOpen, setMobileChaptersOpen] = useState(false);
+  const [hqOpen, setHqOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
