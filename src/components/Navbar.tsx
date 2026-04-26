@@ -231,7 +231,10 @@ const Navbar = () => {
           )}
 
           <button
-            onClick={() => {
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
               setMobileOpen(false);
               setHqOpen(true);
             }}
