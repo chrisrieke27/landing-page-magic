@@ -238,6 +238,36 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
   const [compPwOpen, setCompPwOpen] = useState(false);
   const [compPwInput, setCompPwInput] = useState("");
 
+  // Password gates for Photos and Branding sections (password "IPO")
+  const [photosUnlocked, setPhotosUnlocked] = useState(false);
+  const [brandingUnlocked, setBrandingUnlocked] = useState(false);
+  const [photosPw, setPhotosPw] = useState("");
+  const [brandingPw, setBrandingPw] = useState("");
+  const [photosErr, setPhotosErr] = useState("");
+  const [brandingErr, setBrandingErr] = useState("");
+
+  const tryUnlockPhotos = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (photosPw === PASSWORD) {
+      setPhotosUnlocked(true);
+      setPhotosErr("");
+      setPhotosPw("");
+    } else {
+      setPhotosErr("Incorrect password. Please try again.");
+    }
+  };
+
+  const tryUnlockBranding = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (brandingPw === PASSWORD) {
+      setBrandingUnlocked(true);
+      setBrandingErr("");
+      setBrandingPw("");
+    } else {
+      setBrandingErr("Incorrect password. Please try again.");
+    }
+  };
+
   useEffect(() => {
     document.title = `${chapter.name} | IPO Investing`;
   }, [chapter.name]);
