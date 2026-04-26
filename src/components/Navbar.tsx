@@ -253,6 +253,7 @@ const Navbar = () => {
           </Link>
         </div>
       )}
+      <HQAdminPanel open={hqOpen} onOpenChange={setHqOpen} />
     </nav>
   );
 };
