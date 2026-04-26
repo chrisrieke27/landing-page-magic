@@ -120,8 +120,13 @@ const Navbar = () => {
           </div>
 
           <button
-            onClick={() => setHqOpen(true)}
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setHqOpen(true);
+            }}
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
           >
             HQ
           </button>
