@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Lock } from "lucide-react";
 import chapterIU from "@/assets/chapter-iu.png";
 import chapterUT from "@/assets/chapter-ut.png";
 import chapterAM from "@/assets/chapter-am.png";
 import chapterSDSU from "@/assets/chapter-sdsu.png";
 import chapterClemson from "@/assets/chapter-clemson.png";
+import HQAdminPanel from "@/components/HQAdminPanel";
 import {
   CustomChapter,
   getChapterLogoUrl,
@@ -21,6 +24,7 @@ const baseChapters = [
 
 const OurChapters = () => {
   const [customChapters, setCustomChapters] = useState<CustomChapter[]>([]);
+  const [hqOpen, setHqOpen] = useState(false);
 
   useEffect(() => {
     setCustomChapters(loadCustomChapters());
@@ -36,6 +40,17 @@ const OurChapters = () => {
   return (
     <section className="py-24 bg-background">
       <div className="container mx-auto px-4">
+        <div className="flex justify-end max-w-5xl mx-auto mb-6">
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={() => setHqOpen(true)}
+          >
+            <Lock className="h-4 w-4 mr-2" />
+            HQ
+          </Button>
+        </div>
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold" style={{ color: "#1F5FA9" }}>
             Our Chapters
@@ -72,6 +87,7 @@ const OurChapters = () => {
           ))}
         </div>
       </div>
+      <HQAdminPanel open={hqOpen} onOpenChange={setHqOpen} />
     </section>
   );
 };
