@@ -35,7 +35,6 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [chaptersOpen, setChaptersOpen] = useState(false);
   const [mobileChaptersOpen, setMobileChaptersOpen] = useState(false);
-  const [hqOpen, setHqOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
