@@ -213,27 +213,6 @@ const ChapterResources = () => {
           </p>
         </div>
 
-        {/* Branding */}
-        <div className="bg-card rounded-2xl border p-6 shadow-sm mb-8">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="rounded-full p-2 bg-blue-100 text-blue-600">
-              <ExternalLink className="h-5 w-5" />
-            </div>
-            <h2 className="text-xl font-semibold">Branding</h2>
-          </div>
-          <p className="text-muted-foreground">
-            <a
-              href="https://drive.google.com/drive/folders/1uYOMaLUZsucUZ48W-c5JGEsIY7ja0LES?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:underline font-medium"
-            >
-              Google Drive Link
-            </a>:
-            {" "}Logos & slide deck templates for chapters.
-          </p>
-        </div>
-
         {/* Chapter Branding */}
         <div className="bg-card rounded-2xl border p-6 shadow-sm mb-8">
           <div className="flex items-center gap-3 mb-4">
