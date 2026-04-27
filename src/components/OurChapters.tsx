@@ -24,6 +24,7 @@ const baseChapters = [
 
 const OurChapters = () => {
   const [customChapters, setCustomChapters] = useState<CustomChapter[]>([]);
+  const [hqOpen, setHqOpen] = useState(false);
 
   useEffect(() => {
     setCustomChapters(loadCustomChapters());
@@ -39,6 +40,17 @@ const OurChapters = () => {
   return (
     <section className="py-24 bg-background">
       <div className="container mx-auto px-4">
+        <div className="flex justify-end max-w-5xl mx-auto mb-6">
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={() => setHqOpen(true)}
+          >
+            <Lock className="h-4 w-4 mr-2" />
+            HQ
+          </Button>
+        </div>
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold" style={{ color: "#1F5FA9" }}>
             Our Chapters
@@ -75,6 +87,7 @@ const OurChapters = () => {
           ))}
         </div>
       </div>
+      <HQAdminPanel open={hqOpen} onOpenChange={setHqOpen} />
     </section>
   );
 };
