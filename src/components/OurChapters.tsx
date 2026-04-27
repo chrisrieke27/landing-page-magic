@@ -40,21 +40,24 @@ const OurChapters = () => {
   return (
     <section className="py-24 bg-background">
       <div className="container mx-auto px-4">
-        <div className="flex justify-end max-w-5xl mx-auto mb-6">
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            onClick={() => setHqOpen(true)}
-          >
-            <Lock className="h-4 w-4 mr-2" />
-            HQ
-          </Button>
-        </div>
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold" style={{ color: "#1F5FA9" }}>
-            Our Chapters
-          </h2>
+        <div className="relative max-w-5xl mx-auto mb-10">
+          <div className="text-center">
+            <h2 className="text-3xl md:text-4xl font-bold" style={{ color: "#1F5FA9" }}>
+              Our Chapters
+            </h2>
+          </div>
+          <div className="mt-4 flex justify-center md:absolute md:right-0 md:top-0 md:mt-0">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => setHqOpen(true)}
+              aria-label="Open HQ admin panel"
+            >
+              <Lock className="h-4 w-4 mr-2" />
+              HQ
+            </Button>
+          </div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 max-w-5xl mx-auto">
           {baseChapters.map((ch) => (
@@ -87,7 +90,11 @@ const OurChapters = () => {
           ))}
         </div>
       </div>
-      <HQAdminPanel open={hqOpen} onOpenChange={setHqOpen} />
+      <HQAdminPanel
+        open={hqOpen}
+        onOpenChange={setHqOpen}
+        onChapterAdded={() => setCustomChapters(loadCustomChapters())}
+      />
     </section>
   );
 };

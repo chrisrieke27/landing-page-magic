@@ -55,6 +55,10 @@ export const loadCustomChapters = (): CustomChapter[] => {
 export const saveCustomChapters = (list: CustomChapter[]) => {
   try {
     localStorage.setItem(CUSTOM_CHAPTERS_KEY, JSON.stringify(list));
+    // Notify other components in the same tab (storage event only fires cross-tab)
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("custom-chapters-updated"));
+    }
   } catch {
     /* ignore */
   }
