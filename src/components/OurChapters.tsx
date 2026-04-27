@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Lock } from "lucide-react";
 import chapterIU from "@/assets/chapter-iu.png";
 import chapterUT from "@/assets/chapter-ut.png";
 import chapterAM from "@/assets/chapter-am.png";
 import chapterSDSU from "@/assets/chapter-sdsu.png";
 import chapterClemson from "@/assets/chapter-clemson.png";
+import HQAdminPanel from "@/components/HQAdminPanel";
 import {
   CustomChapter,
   getChapterLogoUrl,
