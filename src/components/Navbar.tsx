@@ -119,18 +119,6 @@ const Navbar = () => {
             )}
           </div>
 
-          <button
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              setHqOpen(true);
-            }}
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-          >
-            HQ
-          </button>
-
           {navLinks.slice(2).map((link) =>
             link.href.startsWith("/") ? (
               <Link
