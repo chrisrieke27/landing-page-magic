@@ -380,6 +380,78 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
         </section>
 
         <div className="container mx-auto px-4 py-16 space-y-16 max-w-4xl">
+          {/* For A&M and Clemson, render Chapter Setup at the very top */}
+          {["am", "clemson"].includes(chapter.slug) && (
+          <section>
+            <div className="flex items-center justify-between mb-6 gap-4 flex-wrap">
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground">Chapter Setup</h2>
+              {complianceEdit ? (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setComplianceEdit(false);
+                    toast({ title: "Compliance locked" });
+                  }}
+                >
+                  <LockOpen className="h-4 w-4 mr-2" />
+                  Lock Compliance
+                </Button>
+              ) : (
+                <Button variant="outline" size="sm" onClick={() => setCompPwOpen(true)}>
+                  <Lock className="h-4 w-4 mr-2" />
+                  Edit Compliance
+                </Button>
+              )}
+            </div>
+
+            <div
+              className={`rounded-xl border px-5 py-4 mb-4 flex items-center gap-3 font-semibold ${
+                allCompliant
+                  ? "bg-green-50 border-green-300 text-green-800 dark:bg-green-950/40 dark:border-green-800 dark:text-green-300"
+                  : "bg-yellow-50 border-yellow-300 text-yellow-800 dark:bg-yellow-950/40 dark:border-yellow-800 dark:text-yellow-300"
+              }`}
+            >
+              {allCompliant ? (
+                <>
+                  <CheckCircle2 className="h-5 w-5" />
+                  Chapter Setup Complete ✓
+                </>
+              ) : (
+                <>
+                  <AlertCircle className="h-5 w-5" />
+                  Setup In Progress
+                </>
+              )}
+            </div>
+
+            <div className="rounded-xl border border-border bg-card shadow-sm divide-y divide-border">
+              {complianceSteps.map((step, idx) => (
+                <label
+                  key={idx}
+                  className={`flex items-start gap-3 p-4 ${
+                    complianceEdit ? "cursor-pointer hover:bg-muted/40" : "cursor-default"
+                  }`}
+                >
+                  <Checkbox
+                    checked={!!compliance[idx]}
+                    onCheckedChange={() => complianceEdit && toggleCompliance(idx)}
+                    disabled={!complianceEdit}
+                    className="mt-0.5"
+                  />
+                  <span
+                    className={`text-sm md:text-base ${
+                      compliance[idx] ? "text-foreground" : "text-muted-foreground"
+                    }`}
+                  >
+                    {step}
+                  </span>
+                </label>
+              ))}
+            </div>
+          </section>
+          )}
+
           {/* Roster */}
           <section>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">Roster</h2>
