@@ -218,19 +218,6 @@ const Navbar = () => {
             </div>
           )}
 
-          <button
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              setMobileOpen(false);
-              setHqOpen(true);
-            }}
-            className="block w-full text-left py-2 text-sm font-medium text-muted-foreground hover:text-foreground"
-          >
-            HQ
-          </button>
-
           {navLinks.slice(2).map((link) =>
             link.href.startsWith("/") ? (
               <Link
