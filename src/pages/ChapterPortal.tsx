@@ -529,8 +529,8 @@ const ChapterPortalContent = ({ chapter }: { chapter: ChapterConfig }) => {
             </div>
           </section>
 
-          {/* Chapter Setup — hidden for IU, SDSU, UT */}
-          {!["iu", "sdsu", "ut"].includes(chapter.slug) && (
+          {/* Chapter Setup — hidden for IU, SDSU, UT and shown at top for A&M, Clemson */}
+          {!["iu", "sdsu", "ut", "am", "clemson"].includes(chapter.slug) && (
           <section>
             <div className="flex items-center justify-between mb-6 gap-4 flex-wrap">
               <h2 className="text-2xl md:text-3xl font-bold text-foreground">Chapter Setup</h2>
