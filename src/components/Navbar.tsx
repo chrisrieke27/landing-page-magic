@@ -9,7 +9,7 @@ import logoUT from "@/assets/logo-ut.png";
 import logoAM from "@/assets/logo-am.png";
 import logoSDSU from "@/assets/logo-sdsu.png";
 import logoClemson from "@/assets/logo-clemson.png";
-import HQAdminPanel from "@/components/HQAdminPanel";
+
 
 const navLinks = [
   { label: "About", href: "/#about" },
