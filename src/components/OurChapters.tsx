@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Lock } from "lucide-react";
@@ -37,65 +37,75 @@ const OurChapters = () => {
     };
   }, []);
 
-  return (
-    <section className="py-24 bg-background">
-      <div className="container mx-auto px-4">
-        <div className="relative max-w-5xl mx-auto mb-10">
-          <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold" style={{ color: "#1F5FA9" }}>
-              Our Chapters
-            </h2>
-          </div>
-          <div className="mt-4 flex justify-center md:absolute md:right-0 md:top-0 md:mt-0">
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => setHqOpen(true)}
-              aria-label="Open HQ admin panel"
-            >
-              <Lock className="h-4 w-4 mr-2" />
-              HQ
-            </Button>
-          </div>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 max-w-5xl mx-auto">
-          {baseChapters.map((ch) => (
-            <Link
-              key={ch.name}
-              to={ch.href}
-              className="flex flex-col items-center text-center group"
-            >
-              <img
-                src={ch.logo}
-                alt={ch.name}
-                className="w-full max-w-[200px] rounded-2xl shadow-sm border border-border/50 transition-transform group-hover:scale-105 group-hover:shadow-md"
-              />
-            </Link>
-          ))}
+  const handleOpenHQ = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setHqOpen(true);
+  }, []);
 
-          {customChapters.map((ch) => (
-            <Link
-              key={ch.slug}
-              to={`/chapters/${ch.slug}`}
-              className="flex flex-col items-center text-center group"
-            >
-              <img
-                src={getChapterLogoUrl(ch)}
-                alt={ch.name}
-                className="w-full max-w-[200px] aspect-square object-contain bg-white rounded-2xl shadow-sm border border-border/50 transition-transform group-hover:scale-105 group-hover:shadow-md p-4"
-              />
-              <p className="mt-3 text-sm font-medium text-foreground">{ch.name}</p>
-            </Link>
-          ))}
+  return (
+    <>
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="relative max-w-5xl mx-auto mb-10">
+            <div className="text-center">
+              <h2 className="text-3xl md:text-4xl font-bold" style={{ color: "#1F5FA9" }}>
+                Our Chapters
+              </h2>
+            </div>
+            <div className="mt-4 flex justify-center md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 md:mt-0">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={handleOpenHQ}
+                aria-label="Open HQ admin panel"
+              >
+                <Lock className="h-4 w-4 mr-2" />
+                HQ
+              </Button>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 max-w-5xl mx-auto">
+            {baseChapters.map((ch) => (
+              <Link
+                key={ch.name}
+                to={ch.href}
+                className="flex flex-col items-center text-center group"
+              >
+                <img
+                  src={ch.logo}
+                  alt={ch.name}
+                  className="w-full max-w-[200px] rounded-2xl shadow-sm border border-border/50 transition-transform group-hover:scale-105 group-hover:shadow-md"
+                />
+              </Link>
+            ))}
+
+            {customChapters.map((ch) => (
+              <Link
+                key={ch.slug}
+                to={`/chapters/${ch.slug}`}
+                className="flex flex-col items-center text-center group"
+              >
+                <img
+                  src={getChapterLogoUrl(ch)}
+                  alt={ch.name}
+                  className="w-full max-w-[200px] aspect-square object-contain bg-white rounded-2xl shadow-sm border border-border/50 transition-transform group-hover:scale-105 group-hover:shadow-md p-4"
+                />
+                <p className="mt-3 text-sm font-medium text-foreground">{ch.name}</p>
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* Mounted at root (outside <section>) so portal positioning never inherits stacking context issues */}
       <HQAdminPanel
         open={hqOpen}
         onOpenChange={setHqOpen}
         onChapterAdded={() => setCustomChapters(loadCustomChapters())}
       />
-    </section>
+    </>
   );
 };
 
