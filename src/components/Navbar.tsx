@@ -56,7 +56,7 @@ const Navbar = () => {
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.slice(0, 2).map((link) =>
+          {navLinks.slice(0, 3).map((link) =>
             link.href.startsWith("/") ? (
               <Link
                 key={link.label}
@@ -119,7 +119,7 @@ const Navbar = () => {
             )}
           </div>
 
-          {navLinks.slice(2).map((link) =>
+          {navLinks.slice(3).map((link) =>
             link.href.startsWith("/") ? (
               <Link
                 key={link.label}
@@ -158,7 +158,7 @@ const Navbar = () => {
 
       {mobileOpen && (
         <div className="md:hidden border-t border-border bg-background px-4 pb-4 space-y-1">
-          {navLinks.slice(0, 2).map((link) =>
+          {navLinks.slice(0, 3).map((link) =>
             link.href.startsWith("/") ? (
               <Link
                 key={link.label}
@@ -218,7 +218,7 @@ const Navbar = () => {
             </div>
           )}
 
-          {navLinks.slice(2).map((link) =>
+          {navLinks.slice(3).map((link) =>
             link.href.startsWith("/") ? (
               <Link
                 key={link.label}
