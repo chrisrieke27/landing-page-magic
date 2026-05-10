@@ -14,6 +14,7 @@ import logoClemson from "@/assets/logo-clemson.png";
 const navLinks = [
   { label: "About", href: "/#about" },
   { label: "Contact", href: "/contact" },
+  { label: "IPO Fund", href: "/ipo-fund" },
   { label: "FAQs", href: "/faqs" },
   { label: "Chapter Resources", href: "/chapter-resources" },
 ];

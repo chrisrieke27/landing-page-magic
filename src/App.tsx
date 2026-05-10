@@ -8,6 +8,7 @@ import FAQs from "./pages/FAQs";
 import ChapterResources from "./pages/ChapterResources";
 import ChapterPortal from "./pages/ChapterPortal";
 import Contact from "./pages/Contact";
+import IPOFund from "./pages/IPOFund";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/chapter-resources" element={<ChapterResources />} />
           <Route path="/chapters/:slug" element={<ChapterPortal />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/ipo-fund" element={<IPOFund />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
