@@ -10,10 +10,11 @@ const Footer = () => {
             <img src={logo} alt="IPO Investing HQ" className="h-7" />
           </Link>
           <div className="flex gap-6 text-sm text-muted-foreground">
-            <a href="/#about" className="hover:text-foreground transition-colors">About</a>
+            <Link to="/ipo-fund" className="hover:text-foreground transition-colors">IPO Fund</Link>
+            <Link to="/ipo-tv" className="hover:text-foreground transition-colors">IPO TV</Link>
+            <Link to="/#chapters" className="hover:text-foreground transition-colors">Chapters</Link>
+            <Link to="/chapter-resources" className="hover:text-foreground transition-colors">Resources</Link>
             <Link to="/contact" className="hover:text-foreground transition-colors">Contact</Link>
-            <Link to="/faqs" className="hover:text-foreground transition-colors">FAQs</Link>
-            <Link to="/chapter-resources" className="hover:text-foreground transition-colors">Chapter Resources</Link>
           </div>
           <p className="text-sm text-muted-foreground">
             © 2026 IPO Investing HQ. All rights reserved.
