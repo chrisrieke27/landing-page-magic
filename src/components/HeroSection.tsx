@@ -18,7 +18,7 @@ const HeroSection = () => {
             A National Network of Business School Clubs.
           </span>
           <a
-            href="/#about"
+            href="/#chapters"
             className="text-sm font-semibold text-primary inline-flex items-center gap-1 hover:underline"
           >
             Learn more <ArrowRight className="h-3 w-3" />
