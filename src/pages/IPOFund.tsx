@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Plus } from "lucide-react";
 
 const steps = [
   "Members pitch an upcoming IPO in one slide",
@@ -8,63 +9,71 @@ const steps = [
   "The national winner's IPO receives real capital from IPO Investing Inc.",
 ];
 
-const logos = Array.from({ length: 10 }, (_, i) => ({
-  name: `Company ${i + 1}`,
-  src: null as string | null,
-}));
-
 const IPOFund = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
 
-      <section className="flex-1 bg-[#0B1220] text-white py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 max-w-6xl mx-auto items-center">
-            {/* Left column */}
-            <div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-                The IPO Fund
-              </h1>
-              <p className="text-lg md:text-xl text-white/80 mb-10 leading-relaxed">
-                Our flagship learning experience — pitch an IPO, win nationally, and we invest real capital.
-              </p>
+      {/* Hero */}
+      <section className="bg-[#0B1220] text-white py-20">
+        <div className="container mx-auto px-4 max-w-5xl text-center">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
+            The IPO Fund
+          </h1>
+          <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+            Our flagship learning experience — pitch an IPO, win nationally, and we invest real capital.
+          </p>
+        </div>
+      </section>
 
-              <ol className="space-y-4">
-                {steps.map((step, i) => (
-                  <li key={i} className="flex items-start gap-4">
-                    <span className="shrink-0 h-8 w-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-sm font-semibold text-white">
-                      {i + 1}
-                    </span>
-                    <span className="text-base md:text-lg text-white/90 leading-relaxed pt-1">
-                      {step}
-                    </span>
-                  </li>
-                ))}
-              </ol>
-            </div>
-
-            {/* Right column — logo grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 lg:gap-4">
-              {logos.map((logo) => (
+      {/* Steps */}
+      <section className="bg-[#0B1220] text-white pb-24">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {steps.map((step, i) => (
+              <div
+                key={i}
+                className="relative rounded-2xl p-8 border border-white/10 bg-gradient-to-br from-[#13243f] to-[#0e1a30] hover:border-[#1F5FA9]/60 transition-colors"
+              >
                 <div
-                  key={logo.name}
-                  className="aspect-square rounded-lg bg-white/5 border border-white/10 flex items-center justify-center p-4"
+                  className="text-6xl md:text-7xl font-bold mb-4 leading-none"
+                  style={{ color: "#1F5FA9" }}
                 >
-                  {logo.src ? (
-                    <img
-                      src={logo.src}
-                      alt={logo.name}
-                      className="max-h-full max-w-full object-contain brightness-0 invert"
-                    />
-                  ) : (
-                    <span className="text-white/40 text-xs font-medium text-center">
-                      {logo.name}
-                    </span>
-                  )}
+                  {String(i + 1).padStart(2, "0")}
                 </div>
-              ))}
-            </div>
+                <div className="text-xs uppercase tracking-widest text-white/50 mb-3">
+                  Step {i + 1}
+                </div>
+                <p className="text-base md:text-lg text-white/90 leading-relaxed">
+                  {step}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Past Picks */}
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-3" style={{ color: "#1F5FA9" }}>
+              Past Picks
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              Companies our members believed in — before the market did.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <div
+                key={i}
+                className="aspect-square rounded-xl border-2 border-dashed border-border flex items-center justify-center text-muted-foreground/50 hover:border-[#1F5FA9]/50 hover:text-[#1F5FA9]/70 transition-colors"
+              >
+                <Plus className="h-8 w-8" />
+              </div>
+            ))}
           </div>
         </div>
       </section>
